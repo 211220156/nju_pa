@@ -669,7 +669,7 @@ void alu_test_mul() {
 				test_eflags.val = res_eflags;
 	
 			fflush(stdout);
-			assert(res == (res_asm_a | (res_asm_d << 8)));
+			assert(res == (res_asm_a & 0xFFFF));
 			assert(cpu.eflags.CF == test_eflags.CF);
 			assert(cpu.eflags.OF == test_eflags.OF);
 		}
@@ -688,7 +688,7 @@ void alu_test_mul() {
 			test_eflags.val = res_eflags;
 	
 		fflush(stdout);
-		assert(res == (res_asm_a | (res_asm_d << 8)));
+		assert(res == (res_asm_a & 0xFFFF));
 		assert(cpu.eflags.CF == test_eflags.CF);
 		assert(cpu.eflags.OF == test_eflags.OF);
 	}
