@@ -31,6 +31,7 @@ void set_SF(uint32_t res, size_t data_size)
 {
 //    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)) ,data_size);
 //    cpu.eflags.SF = sign(res);
+    res = res & (0xFFFFFFFF >> (32 - data_size));
     cpu.eflags.SF = (res >> (data_size - 1)) & 1;
 }
 
