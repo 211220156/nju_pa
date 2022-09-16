@@ -1,14 +1,70 @@
 #include "cpu/cpu.h"
 
+void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
+{
+    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    
+    cpu.eflags.CF = res < src;
+}
+
+void set_PF(uint32_t res)
+{
+    int ans = 0;
+    for (int i = 0; i < 8; i++) {
+        if (((res >> i) & 1) == 1)
+            ans++;
+    }
+    if (ans % 2 == 0)
+        cpu.eflags.PF = 1;
+    else
+        cpu.eflags.PF = 0;
+}
+
+void set_ZF(uint32_t res, size_t data_size)
+{
+    res = res & (0xFFFFFFFF >> (32 - data_size));
+    cpu.eflags.ZF = res == 0;
+}
+
+void set_SF(uint32_t res, size_t data_size)
+{
+    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)) ,data_size);
+    cpu.eflags.SF = sign(res);
+}
+
+void set_OF_add(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
+{
+    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    if (sign(dest) == sign(src)) {
+        if (sign(src) == sign(res)) {
+            cpu.eflags.OF = 0;
+        } else {
+            cpu.eflags.OF = 1;
+        }
+    } else {
+        cpu.eflags.OF = 0;
+    }
+}
+
 uint32_t alu_add(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_add(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	uint32_t res = 0;
+	res = dest + src;
+	
+	set_CF_add(res, src, data_size);
+	set_PF(res);
+	set_ZF(res, data_size);
+	set_SF(res, data_size);
+	set_OF_add(res, src, dest, data_size);
+	
+	return res & (0xFFFFFFFF >> (32 - data_size));//高位清零
+	
 #endif
 }
 
