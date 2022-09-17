@@ -373,7 +373,14 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 	src = src & (0xFFFFFFFF >> (32 - data_size));
 	dest = dest & (0xFFFFFFFF >> (32 - data_size));
 	cpu.eflags.CF = (dest >> (src - 1)) % 2;//CF是第src位。
-	uint32_t res = (int32_t)dest >> (int32_t)src;
+	int sign = dest >> (data_size - 1) % 2;
+	uint32_t res = 0;
+	if (sign == 1) {
+	    res = (dest >> src) | ((0xFFFFFFFF >> (data_size - src)) << (data_size - src));
+	} else {
+	    res = dest >> src;
+	}
+	res = res & (0xFFFFFFFF >> (32 - data_size));
 	set_SF(res, data_size);
     set_PF(res);
     set_ZF(res, data_size);
