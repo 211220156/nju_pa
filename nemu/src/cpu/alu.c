@@ -345,6 +345,7 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
     cpu.eflags.CF = (dest >> (data_size - src)) % 2;
     uint32_t res = (dest << src) & (0xFFFFFFFF >> (32 - data_size));
     set_SF(res, data_size);
+    set_PF(res);
     return res;
 	
 #endif
