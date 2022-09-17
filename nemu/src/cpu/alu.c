@@ -363,16 +363,15 @@ uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
 	
 #endif
 }
-
+/*************************alu_sar实现 算术右移*************************/
 uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_sar(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	
+	return alu_shr(src, dest, data_size);
+	
 #endif
 }
 /*************************alu_sal实现 算术左移*************************/
