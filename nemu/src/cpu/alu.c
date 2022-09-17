@@ -343,7 +343,7 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
     low = (low << src) & (0xFFFFFFFF >> (32 - data_size));
     return high | low;*/
     cpu.eflags.CF = (dest >> (data_size - src)) % 2;
-    return dest << src;
+    return (dest << src) & (0xFFFFFFFF >> (32 - data_size));
 	
 #endif
 }
