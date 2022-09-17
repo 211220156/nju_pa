@@ -370,7 +370,14 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 	return __ref_alu_sar(src, dest, data_size);
 #else
 	
-	return alu_shr(src, dest, data_size);
+	src = src & (0xFFFFFFFF >> (32 - data_size));
+	dest = dest & (0xFFFFFFFF >> (32 - data_size));
+	cpu.eflags.CF = (dest >> (src - 1)) % 2;//CF是第src位。
+	uint32_t res = (int32_t)dest >> (int32_t)src;
+	set_SF(res, data_size);
+    set_PF(res);
+    set_ZF(res, data_size);
+    return res;
 	
 #endif
 }
