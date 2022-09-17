@@ -333,17 +333,11 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_shl(src, dest, data_size);
 #else
-	
+	//先将高位清零
 	src = src & (0xFFFFFFFF >> (32 - data_size));
 	dest = dest & (0xFFFFFFFF >> (32 - data_size));
-/*    uint32_t high = (dest >> data_size) << data_size;
-    uint32_t low = dest & (0xFFFFFFFF >> (32 - data_size));
-    
-    cpu.eflags.CF = (low >> (data_size - src)) % 2;
-    low = (low << src) & (0xFFFFFFFF >> (32 - data_size));
-    return high | low;*/
-    cpu.eflags.CF = (dest >> (data_size - src)) % 2;
-    uint32_t res = (dest << src) & (0xFFFFFFFF >> (32 - data_size));
+    cpu.eflags.CF = (dest >> (data_size - src)) % 2; //CF就是dest从右往左数第data_size+1-src位。
+    uint32_t res = (dest << src) & (0xFFFFFFFF >> (32 - data_size));//左移后高位清零
     set_SF(res, data_size);
     set_PF(res);
     set_ZF(res, data_size);
@@ -351,16 +345,22 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
 	
 #endif
 }
-
+/*************************alu_shr实现 逻辑右移*************************/
 uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_shr(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	
+	src = src & (0xFFFFFFFF >> (32 - data_size));
+	dest = dest & (0xFFFFFFFF >> (32 - data_size));
+	cpu.eflags.CF = (dest >> (src - 1)) % 2;
+	uint32_t res = dest >> src;
+	set_SF(res, data_size);
+    set_PF(res);
+    set_ZF(res, data_size);
+    return res;
+	
 #endif
 }
 
