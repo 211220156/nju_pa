@@ -335,12 +335,14 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
 #else
 	
 	src = src & (0xFFFFFFFF >> (32 - data_size));
-    uint32_t high = (dest >> data_size) << data_size;
+/*    uint32_t high = (dest >> data_size) << data_size;
     uint32_t low = dest & (0xFFFFFFFF >> (32 - data_size));
     
     cpu.eflags.CF = (low >> (data_size - src)) % 2;
     low = (low << src) & (0xFFFFFFFF >> (32 - data_size));
-    return high | low;
+    return high | low;*/
+    cpu.eflags.CF = (dest >> (data_size - src)) % 2;
+    return dest << src;
 	
 #endif
 }
