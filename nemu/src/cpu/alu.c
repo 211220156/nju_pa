@@ -144,7 +144,7 @@ uint32_t alu_sub(uint32_t src, uint32_t dest, size_t data_size)
 #else
 	
 	uint32_t res = 0;
-	res = dest - sign_ext(src & (src >> (32 - data_size)), data_size);
+	res = dest - src;//sign_ext(src & (src >> (32 - data_size)), data_size);
 	
 	set_CF_sub(res, dest, data_size);
 	set_PF(res);
