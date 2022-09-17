@@ -193,16 +193,15 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 	
 #endif
 }
-
+/*************************alu_mul实现*************************/
 uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_mul(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	
+	
+	
 #endif
 }
 
@@ -267,16 +266,19 @@ int32_t alu_imod(int64_t src, int64_t dest)
 	return 0;
 #endif
 }
-
+/*************************alu_and实现*************************/
 uint32_t alu_and(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_and(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	
+	cpu.eflags.CF = 0;
+	cpu.eflags.OF = 0;
+	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	return dest & src;
+	
 #endif
 }
 
