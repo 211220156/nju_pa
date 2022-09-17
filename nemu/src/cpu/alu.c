@@ -354,7 +354,7 @@ uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
 	
 	src = src & (0xFFFFFFFF >> (32 - data_size));
 	dest = dest & (0xFFFFFFFF >> (32 - data_size));
-	cpu.eflags.CF = (dest >> (src - 1)) % 2;
+	cpu.eflags.CF = (dest >> (src - 1)) % 2;//CF是第src位。
 	uint32_t res = dest >> src;
 	set_SF(res, data_size);
     set_PF(res);
@@ -375,15 +375,14 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 	return 0;
 #endif
 }
-
+/*************************alu_sal实现 算术左移*************************/
 uint32_t alu_sal(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_sal(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	
+	return alu_shl(src, dest, data_size);
+	
 #endif
 }
