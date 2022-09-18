@@ -204,7 +204,7 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
     dest = dest & (0xFFFFFFFF >> (32 - data_size));
     
     uint64_t res = 0;
-    res = uint64_t(dest) * uint64_t(src);
+    res = (uint64_t(dest)) * (uint64_t(src));
     
     return res;
     
