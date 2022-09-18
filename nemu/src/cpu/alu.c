@@ -375,8 +375,9 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 	cpu.eflags.CF = (dest >> (src - 1)) % 2;//CF是第src位。
 	int sign = dest >> (data_size - 1) % 2;
 	uint32_t res = 0;
+	uint32_t temp = (0xFFFFFFFF >> (data_size - src)) << (data_size - src);
 	if (sign == 1) {
-	    res = (dest >> src) | ((0xFFFFFFFF >> (data_size - src)) << (data_size - src));
+	    res = (dest >> src) | temp;
 	} else {
 	    res = dest >> src;
 	}
