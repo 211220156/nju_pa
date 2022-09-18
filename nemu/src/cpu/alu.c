@@ -204,37 +204,12 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
     dest = dest & (0xFFFFFFFF >> (32 - data_size));
     uint64_t res = 0, dest_64 = dest, src_64 = src;
     res = (dest_64 * src_64) & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
-    switch (data_size){
-        case 8: {
-            uint64_t AH = res >> 8;
-            if (AH == 0) {
-                cpu.eflags.CF = 0;
-                cpu.eflags.OF = 0;
-            } else {
-                cpu.eflags.CF = 1;
-                cpu.eflags.OF = 1;
-            }
-        }
-        case 16: {
-            uint64_t DX = res >> 16;
-            if (DX == 0) {
-                cpu.eflags.CF = 0;
-                cpu.eflags.OF = 0;
-            } else {
-                cpu.eflags.CF = 1;
-                cpu.eflags.OF = 1;
-            }
-        }
-        case 32: {
-            uint64_t EDX = res >> 32;
-            if (EDX == 0) {
-                cpu.eflags.CF = 0;
-                cpu.eflags.OF = 0;
-            } else {
-                cpu.eflags.CF = 1;
-                cpu.eflags.OF = 1;
-            }
-        }
+    if ((res >> data_size) == 0) {
+        cpu.eflags.CF = 0;
+        cpu.eflags.OF = 0;
+    } else {
+        cpu.eflags.CF = 1;
+        cpu.eflags.OF = 1;
     }
     return res;
     
