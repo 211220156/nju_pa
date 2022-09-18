@@ -224,7 +224,7 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 #else
 
     int64_t res = 0, dest_64 = dest, src_64 = src;
-    res = dest * src;
+    res = dest_64 * src_64;
     return res;
 
 #endif
