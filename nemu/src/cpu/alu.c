@@ -228,17 +228,20 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	return 0;
 #endif
 }
-
+/*************************alu_div实现*************************/
 // need to implement alu_mod before testing
 uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_div(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+
+    src = src & (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
+    dest = dest & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
+    
+    assert(src != 0);
+    return dest / src;
+
 #endif
 }
 
