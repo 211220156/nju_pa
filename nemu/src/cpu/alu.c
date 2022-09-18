@@ -225,7 +225,7 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
                 cpu.eflags.OF = 1;
             }
         }
-        default:{
+        case 32: {
             uint64_t EDX = res >> 32;
             if (EDX == 0) {
                 cpu.eflags.CF = 0;
