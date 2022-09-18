@@ -216,16 +216,15 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 	
 #endif
 }
-
+/*************************alu_imul实现*************************/
 int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_imul(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+
+    return alu_mul(src, dest, data_size);
+
 #endif
 }
 /*************************alu_div实现*************************/
