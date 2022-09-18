@@ -264,8 +264,6 @@ uint32_t alu_mod(uint64_t src, uint64_t dest)
 	return __ref_alu_mod(src, dest);
 #else
 	
-	src = src & (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
-    dest = dest & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
     assert(src != 0);
     
     return dest % src;
