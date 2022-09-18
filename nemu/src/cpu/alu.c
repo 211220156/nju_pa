@@ -223,7 +223,7 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	return __ref_alu_imul(src, dest, data_size);
 #else
 
-    return dest / src;
+    return dest * src;
 
 #endif
 }
