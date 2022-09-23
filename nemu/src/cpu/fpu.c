@@ -77,7 +77,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	{
 		/* TODO: round up and remove the GRS bits */
 		if ((sig_grs & 0x7) == 4){
-		    if ((sig_grs >> 3) & 0x1 == 1) {
+		    if ((sig_grs >> 3) % 2 == 1) {
 		        sig_grs >>= 3;
 		        sig_grs += 1;
 		    } else {
@@ -89,7 +89,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		    sig_grs >>= 3;
 		    sig_grs += 1;
 		}
-		if (((sig_grs >> (23 + 3)) > 1) && exp < 0xff) {//若舍入后需要右规
+		if (((sig_grs >> 23) > 1) && exp < 0xff) {//若舍入后需要右规
 			sig_grs >>= 1;
 			exp++;
 		}
