@@ -90,9 +90,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		    sig_grs += 1;
 		}
 		if (((sig_grs >> (23 + 3)) > 1) && exp < 0xff) {//若舍入后需要右规
-		    sticky = sticky | (sig_grs & 0x1);
 			sig_grs >>= 1;
-			sig_grs |= sticky;
 			exp++;
 		}
 		if (exp >= 0xff)
@@ -190,6 +188,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	}
 */
     shift = (fb.exponent == 0 ? fb.exponent + 1 : fb.exponent) - (fa.exponent == 0 ? fa.exponent + 1 : fa.exponent);
+	
 	sig_a = (sig_a << 3); // guard, round, sticky
 	sig_b = (sig_b << 3);
 
