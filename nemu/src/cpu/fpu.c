@@ -97,7 +97,6 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		}
 		if (exp >= 0xff)
 		{
-			/* TODO: assign the number to infinity */
 			exp = 0xff;
 			sig_grs = 0;
 			overflow = true;
@@ -176,7 +175,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	uint32_t shift = 0;
 
 	/* TODO: shift = ? */
-	if (!fa.exponent || !fb.exponent) {
+	/*if (!fa.exponent || !fb.exponent) {
 	    if (!fa.exponent && !fb.exponent){
 	        shift = fb.exponent - fa.exponent;
 	    } else {
@@ -189,7 +188,8 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	} else {
 	    shift = fb.exponent - fa.exponent;
 	}
-
+*/
+    shift = (fb.exponent == 0 ? fb.exponent + 1 : fb.exponent) - (fa.exponent == 0 ? fa.exponent + 1 : fa.exponent);
 	sig_a = (sig_a << 3); // guard, round, sticky
 	sig_b = (sig_b << 3);
 
