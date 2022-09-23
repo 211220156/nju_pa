@@ -89,7 +89,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		    sig_grs >> 3;
 		    sig_grs += 1;
 		}
-		if (((sig_grs >> (23 + 3)) > 1) && exp < 0xff) {//若舍入后需要右规
+		if (((sig_grs >> (23 + 3)) > 1) && exp < 0xff) {/*若舍入后需要右规*/
 		    sticky = sticky | (sig_grs & 0x1);
 			sig_grs >> 1;
 			sig_grs |= sticky;
