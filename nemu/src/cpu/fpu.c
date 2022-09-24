@@ -40,12 +40,16 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			// we have a denormal here, the exponent is 0, but means 2^-126,
 			// as a result, the significand should shift right once more
 			/* TODO: shift right, pay attention to sticky bit*/
-			
+			sticky = sticky | (sig_grs & 0x1);
+			sig_grs >>= 1;
+			sig_grs |= sticky;
+			exp++;
 		}
 		if (exp < 0)
 		{
 			/* TODO: assign the number to zero */
-			
+			exp = 0;
+			sig_grs = 0;
 			overflow = true;
 		}
 	}
@@ -173,20 +177,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	uint32_t shift = 0;
 
 	/* TODO: shift = ? */
-	/*if (!fa.exponent || !fb.exponent) {
-	    if (!fa.exponent && !fb.exponent){
-	        shift = fb.exponent - fa.exponent;
-	    } else {
-	        if (!fa.exponent){
-	            shift = fb.exponent - 1;
-	        } else {
-	            shift = -126 - (fa.exponent - 127);
-	        }
-	    }
-	} else {
-	    shift = fb.exponent - fa.exponent;
-	}
-*/
+	
     shift = (fb.exponent == 0 ? fb.exponent + 1 : fb.exponent) - (fa.exponent == 0 ? fa.exponent + 1 : fa.exponent);
 	
 	sig_a = (sig_a << 3); // guard, round, sticky
@@ -313,9 +304,7 @@ uint32_t internal_float_mul(uint32_t b, uint32_t a)
 	uint32_t exp_res = 0;
 
 	/* TODO: exp_res = ? leave space for GRS bits. */
-	printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
+	exp_res = fa.exponent + fb.exponent - 127 - 23 + 3;
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
