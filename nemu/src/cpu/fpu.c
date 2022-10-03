@@ -183,7 +183,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	sig_b = (sig_b << 3);
 
 	uint32_t sticky = 0;
-	while (shift > 0)
+	while (shift > 0)//对阶
 	{
 		sticky = sticky | (sig_a & 0x1);
 		sig_a = sig_a >> 1;
@@ -294,7 +294,7 @@ uint32_t internal_float_mul(uint32_t b, uint32_t a)
 	if (fb.exponent != 0)
 		sig_b |= 0x800000; // the hidden 1
 
-	if (fa.exponent == 0)
+	if (fa.exponent == 0)//?????
 		fa.exponent++;
 	if (fb.exponent == 0)
 		fb.exponent++;
@@ -303,7 +303,7 @@ uint32_t internal_float_mul(uint32_t b, uint32_t a)
 	uint32_t exp_res = 0;
 
 	/* TODO: exp_res = ? leave space for GRS bits. */
-	exp_res = fa.exponent + fb.exponent - 127 - 20;
+	exp_res = fa.exponent + fb.exponent - 127 - 20;//阶码相加，偏执常数加了两次，应该减掉一个127。23位尾数*23位尾数得到46位尾数，我们要保证只有26位尾数，所以阶码-20.
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
@@ -385,7 +385,7 @@ uint32_t internal_float_div(uint32_t b, uint32_t a)
 		fa.exponent++;
 	if (fb.exponent == 0)
 		fb.exponent++;
-	uint32_t exp_res = fa.exponent - fb.exponent + 127 - (shift - 23 - 3);
+	uint32_t exp_res = fa.exponent - fb.exponent + 127 - (shift - 26);//加入GRS bits后，等同于约定中间结果的小数部分为26位。对于除法而言，将被除数左移shift位后除以除数得到的小数部分为shift位，为了保证中间结果的小数部分为26位且真值不变，将多余的shift – 26位从阶码中减去，最后的阶码等于fa.exponent - fb.exponent + 127 – (shift – 26)
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
