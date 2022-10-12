@@ -20,12 +20,12 @@ make_instr_func(call_near)
     opr.val = cpu.eip;
     operand_write(&opr);
     
-    if (rel.data_size == 16){
+/*    if (rel.data_size == 16){
         cpu.eip = (cpu.eip + sign_ext(rel.val, data_size)) & 0x0000ffff;
     } else {
         cpu.eip = cpu.eip + rel.val;
-    }
-//    int offset = sign_ext(rel.val, data_size);
-//    cpu.eip += offset;
+    }*/
+    int offset = sign_ext(rel.val, data_size);
+    cpu.eip += offset;
     return 1 + data_size / 8;
 }
