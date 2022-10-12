@@ -28,5 +28,5 @@ make_instr_func(call_near)
     }*/
     int offset = sign_ext(rel.val, data_size);
     cpu.eip += offset;
-    return 0;
+    return 1 + data_size / 8;//???这个返回值什么用？
 }
