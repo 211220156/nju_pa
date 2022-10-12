@@ -5,10 +5,10 @@ Put the implementations of `push' instructions here.
 static void instr_execute_1op()
 {
     operand_read(&opr_src);
-    cpu.gpr[4] -= (opr_src.data_size / 8);
+    cpu.gpr[4].val -= (opr_src.data_size / 8);
     OPERAND opr = opr_src;
     opr.type = OPR_MEM;
-    opr.addr = cpu.gpr[4];
+    opr.addr = cpu.gpr[4].val;
     operand_write(&opr);
 }
 
