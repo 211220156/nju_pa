@@ -13,11 +13,12 @@ make_instr_func(call_near)
     operand_read(&rel);
     //push eip
     cpu.gpr[4].val -= (data_size / 8);
-//    OPERAND opr;
-//    opr.type = OPR_MEM;
-//    opr.addr = cpu.gpr[4].val;
-//    opr.val = cpu.eip;
-    //operand_write(&opr);
+    OPERAND opr;
+    opr.type = OPR_MEM;
+    opr.data_size = data_size;
+    opr.addr = cpu.gpr[4].val;
+    opr.val = cpu.eip;
+    operand_write(&opr);
     
     int offset = sign_ext(rel.val, data_size);
     cpu.eip += offset;
