@@ -3,7 +3,7 @@
 Put the implementations of `ret' instructions here.
 */
 make_instr_func(ret_near){
-    printf("retertret");
+//    printf("retertret");
     OPERAND opr;
     opr.type = OPR_MEM;
     opr.data_size = data_size;
