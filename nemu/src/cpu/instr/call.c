@@ -15,7 +15,7 @@ make_instr_func(call_near)
     cpu.gpr[4].val -= (data_size / 8);
     OPERAND opr;
     opr.type = OPR_MEM;
-    opr.addr = cpu.gpr[4].val;
+    opr.addr = cpu.gpr[4]._32;
     opr.val = cpu.eip;
     operand_write(&opr);
     
