@@ -8,7 +8,7 @@ make_instr_func(ret_near){
     opr.data_size = data_size;
     opr.addr = cpu.gpr[4].val;
     operand_read(&opr);
-    cpu.gpr[4].val += (data_size / 8);
+    cpu.gpr[4].val += 4;
     
     cpu.eip = opr.val;
     if (data_size == 16){
