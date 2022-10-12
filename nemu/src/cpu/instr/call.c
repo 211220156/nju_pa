@@ -10,7 +10,7 @@ make_instr_func(call_near)
     rel.data_size = data_size;
     rel.addr = eip + 1;
 
-    operand_read(&rel);
+    operand_read(&rel);//去eip+1处读取偏移量
     //push eip
     cpu.gpr[4].val -= (data_size / 8);
     OPERAND opr;
@@ -20,13 +20,12 @@ make_instr_func(call_near)
     opr.val = cpu.eip;
     operand_write(&opr);
     
-    if (rel.data_size == 16){
+/*    if (rel.data_size == 16){
         cpu.eip = (cpu.eip + sign_ext(rel.val, data_size)) & 0x0000ffff;
     } else {
         cpu.eip = cpu.eip + rel.val;
-    }
-//    int offset = sign_ext(rel.val, data_size);
-//    cpu.eip += offset;
-    cpu.eip += 5;
+    }*/
+    int offset = sign_ext(rel.val, data_size);
+    cpu.eip += offset;
     return 0;
 }
