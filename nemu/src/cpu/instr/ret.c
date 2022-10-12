@@ -14,4 +14,6 @@ make_instr_func(ret_near){
     if (data_size == 16){
         cpu.eip &= 0x0000ffff;
     }
+    
+    return 0;
 }
