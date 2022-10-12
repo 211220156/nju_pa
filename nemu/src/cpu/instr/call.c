@@ -27,6 +27,6 @@ make_instr_func(call_near)
     }
 //    int offset = sign_ext(rel.val, data_size);
 //    cpu.eip += offset;
-    
+    cpu.eip += 5;
     return 0;
 }
