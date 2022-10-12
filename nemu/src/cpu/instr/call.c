@@ -18,7 +18,7 @@ make_instr_func(call_near)
     opr.type = OPR_MEM;
     opr.data_size = data_size;
     opr.addr = cpu.gpr[4].val;
-    opr.val = cpu.eip;
+    opr.val = cpu.eip + 1 + data_size / 8;
     operand_write(&opr);
     
 /*    if (rel.data_size == 16){
