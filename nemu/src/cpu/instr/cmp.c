@@ -6,7 +6,7 @@ static void instr_execute_2op()
 {
     operand_read(&opr_src);
     operand_read(&opr_dest);
-	alu_sub(sign_ext(opr_src.val, 8), opr_dest.val, 8);
+	alu_sub(sign_ext(opr_src.val, opr_src.data_size), opr_dest.val, data_size);
 }
 
 make_instr_impl_2op(cmp, i, rm, b);
