@@ -4,7 +4,12 @@ Put the implementations of `lea' instructions here.
 */
 make_instr_func(lea)
 {
-    opr_dest.val = opr_src.addr;
-    operand_write(&opr_dest);
-    return 1 + opr_dest.data_size / 8 + opr_src.data_size / 8;
+    int len = 1;
+    OPERAND r, rm;
+    r.data_size = data_size;
+    rm.data_size = data_size();
+    len += modrm_r_rm(cpu.eip + 1, &r, &rm);
+    r.val = rm.addr;
+    operand_write(&r);
+    return len;
 }
