@@ -10,6 +10,7 @@ static void instr_execute_1op()
         opr_src.val = sign_ext(opr_src.val, opr_src.data_size);
     }*/
     OPERAND opr;
+    cpu.gpr[4].val -= (data_size / 8);
     opr.type = OPR_MEM;
     opr.addr = cpu.gpr[4].val;
     opr.data_size = data_size;
