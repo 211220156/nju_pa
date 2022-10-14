@@ -25,7 +25,6 @@ make_instr_func(call_near)
     cpu.eip += offset;
     return 1 + data_size / 8;//???这个返回值什么用？*/
 
-    //与jmp类似，跳转前先将返回地址push进栈
     cpu.gpr[4].val -= 4;
 
     //将栈顶地址准备好
@@ -44,7 +43,6 @@ make_instr_func(call_near)
     rel.sreg = SREG_CS;
     rel.data_size = data_size;
     rel.addr = cpu.eip + 1;
-    //the value of rel
     operand_read(&rel);
     
     int offset = sign_ext(rel.val, data_size);
