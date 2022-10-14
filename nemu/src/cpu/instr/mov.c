@@ -6,7 +6,7 @@ static void instr_execute_2op()
 	printf("mov successfully read!\n");
 	opr_dest.val = opr_src.val;
 	operand_write(&opr_dest);
-	printf("mov successfully write!\n");
+	printf("mov s w!\n");
 }
 
 make_instr_impl_2op(mov, r, rm, b)
