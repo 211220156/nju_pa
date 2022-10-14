@@ -12,4 +12,5 @@ make_instr_func(leave)
     operand_read(&top);
     cpu.esp += (top.data_size / 8); 
     cpu.ebp = top.val;
+    return 1;
 }
