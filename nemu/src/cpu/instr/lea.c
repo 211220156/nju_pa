@@ -8,7 +8,7 @@ make_instr_func(lea)
     OPERAND r, rm;
     r.data_size = data_size;
     rm.data_size = data_size;
-    len += modrm_r_rm(cpu.eip + 1, &r, &rm);
+    len += modrm_r_rm(cpu.eip + 1, &r, &rm);//不用宏需要自己解析modrm字节
     r.val = rm.addr;
     operand_write(&r);
     return len;
