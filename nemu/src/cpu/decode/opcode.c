@@ -152,7 +152,7 @@ instr_func group_x87_df_entry[8] =
 
 instr_func opcode_2_byte_entry[256] = {
     /* 0x00 - 0x03*/ inv, group_7, inv, inv,
-    /* 0x04 - 0x07*/ inv, inv, inv, inv,
+    /* 0x04 - 0x07*/ inv, add_i2a_v, inv, inv,
     /* 0x08 - 0x0b*/ inv, inv, inv, inv,
     /* 0x0c - 0x0f*/ inv, inv, inv, inv,
     /* 0x10 - 0x13*/ inv, inv, inv, inv,
