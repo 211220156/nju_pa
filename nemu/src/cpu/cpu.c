@@ -133,7 +133,7 @@ int exec_inst()
 #ifdef NEMU_REF_INSTR
 	int len = __ref_opcode_entry[opcode](cpu.eip, opcode);
 #else
-    printf("in exec_inst   opcode = %x",opcode);
+    printf("in exec_inst   opcode = %x \n",opcode);
 	int len = opcode_entry[opcode](cpu.eip, opcode);
 #endif
 	return len;
