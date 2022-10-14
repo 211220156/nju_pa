@@ -55,6 +55,5 @@ make_instr_func(call_near)
     //printf("the eip =  %x\n", cpu.eip);
 
     return 1 + data_size / 8;
-    
-}
+   
 }
