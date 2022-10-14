@@ -14,7 +14,7 @@ static void instr_execute_1op()
     opr.addr = cpu.gpr[4].val;
     opr.data_size = data_size;
     opr.val = opr_src.val;
-    opr_dest = SREG_CS;
+    opr.sreg = SREG_CS;
     operand_write(&opr);
 }
 
