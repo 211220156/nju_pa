@@ -6,6 +6,9 @@ static void instr_execute_1op()
 {
     operand_read(&opr_src);
     cpu.gpr[4].val -= (opr_src.data_size / 8);
+    if (opr_src.type == OPR_IMM) {
+        opr_src.val = sign_ext(opr_src.val);
+    }
     OPERAND opr = opr_src;
     opr.type = OPR_MEM;
     opr.addr = cpu.gpr[4].val;
