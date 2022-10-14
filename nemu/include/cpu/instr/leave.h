@@ -3,5 +3,5 @@
 /*
 Put the declarations of `leave' instructions here.
 */
-
+make_instr_func(leave);
 #endif
