@@ -61,7 +61,7 @@ void exec(uint32_t n)
 	nemu_state = NEMU_RUN;
 	while (n > 0 && nemu_state == NEMU_RUN)
 	{
-	    printf("the eip = %x\n", cpu.eip);
+	  //  printf("the eip = %x\n", cpu.eip);
 		if(!is_nemu_hlt)
 		{
 			instr_len = exec_inst();
@@ -133,7 +133,7 @@ int exec_inst()
 #ifdef NEMU_REF_INSTR
 	int len = __ref_opcode_entry[opcode](cpu.eip, opcode);
 #else
-    printf("in exec_inst   opcode = %x \n",opcode);
+ //   printf("in exec_inst   opcode = %x \n",opcode);
 	int len = opcode_entry[opcode](cpu.eip, opcode);
 #endif
 	return len;
