@@ -31,7 +31,7 @@ make_instr_func(call_near)
     //将栈顶地址准备好
     OPERAND stk_top;
     stk_top.type = OPR_MEM;
-    stk_top.addr = cpu.gpr[4]._32;
+    stk_top.addr = cpu.gpr[4].val;
     stk_top.data_size = 32;
     stk_top.sreg = SREG_CS;
 
