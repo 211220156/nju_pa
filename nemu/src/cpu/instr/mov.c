@@ -3,10 +3,10 @@
 static void instr_execute_2op() 
 {
 	operand_read(&opr_src);
-	printf("mov successfully read!\n");
+//	printf("mov successfully read!\n");
 	opr_dest.val = opr_src.val;
 	operand_write(&opr_dest);
-	printf("mov s w!\n");
+//	printf("mov s w!\n");
 }
 
 make_instr_impl_2op(mov, r, rm, b)
