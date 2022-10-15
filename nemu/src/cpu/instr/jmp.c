@@ -40,6 +40,7 @@ make_instr_func(jmp_near_indirect)
     OPERAND offset;
     offset.data_size = data_size;
     offset.type = OPR_MEM;
+    offset.sreg = SREG_CS;
     len += modrm_rm(eip + 1, &offset);
     
   /*  if (offset.data_size == 16){
