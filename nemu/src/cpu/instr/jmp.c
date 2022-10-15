@@ -39,7 +39,7 @@ make_instr_func(jmp_near_indirect)
     OPERAND offset;
     offset.data_size = data_size;
     offset.sreg = SREG_CS;
-    modrm_rm(eip + 1, &offset);
+    modrm_rm(cpu.eip + 1, &offset);
     
     if (offset.data_size == 16){
         offset.val = offset.val & 0x0000ffff;
