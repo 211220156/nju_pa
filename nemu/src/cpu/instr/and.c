@@ -15,3 +15,4 @@ make_instr_impl_2op(and, i, rm, bv)
 make_instr_impl_2op(and, rm, r, b);
 make_instr_impl_2op(and, r, rm, v);
 make_instr_impl_2op(and, i, rm, v);
+make_instr_impl_2op(and, i, rm, b);
