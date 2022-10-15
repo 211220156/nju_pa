@@ -40,8 +40,7 @@ make_instr_func(jmp_near_indirect)
     OPERAND offset;
     offset.data_size = data_size;
     offset.type = OPR_MEM;
-    offset.addr = eip + 1;
-    len += modrm_rm(eip + 1, &offset);
+    len += modrm_rm(eip , &offset);
     
   /*  if (offset.data_size == 16){
         offset.val = offset.val & 0x0000ffff;
