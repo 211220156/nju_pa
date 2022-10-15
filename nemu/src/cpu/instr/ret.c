@@ -21,8 +21,6 @@ make_instr_func(ret_near){
 make_instr_func(ret_near_imm16)
 {
     
-    
-    
     OPERAND opr;
     opr.type = OPR_MEM;
     opr.data_size = data_size;
@@ -37,7 +35,7 @@ make_instr_func(ret_near_imm16)
     imm16.sreg = SREG_CS;
     imm16.addr = cpu.eip + 1;
     operand_read(&imm16);
-    cpu.esp += imm16.val;
+    cpu.gpr[4].val += imm16.val;
     
     cpu.eip = opr.val;
     if (data_size == 16){
