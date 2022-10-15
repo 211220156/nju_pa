@@ -42,7 +42,7 @@ make_instr_func(jmp_near_indirect)
     modrm_rm(cpu.eip + 1, &offset);
     
     cpu.eip = offset.val;
-    if (data_size == 16){
+    if (offset.data_size == 16){
         cpu.eip = cpu.eip & 0x0000ffff;
     }
     
