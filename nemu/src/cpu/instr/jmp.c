@@ -28,7 +28,7 @@ make_instr_func(jmp_short)
 
     operand_read(&rel);
 
-    int offset = sign_ext(rel.val, data_size);
+    int offset = sign_ext(rel.val, rel.data_size);
 
     cpu.eip += offset;
 
