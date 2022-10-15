@@ -42,5 +42,5 @@ make_instr_func(ret_near_imm16)
         cpu.eip &= 0x0000ffff;
     }
     
-    return 3;
+    return 0;
 }
