@@ -41,6 +41,8 @@ make_instr_func(jmp_near_indirect)
     offset.sreg = SREG_CS;
     modrm_rm(cpu.eip + 1, &offset);
     
+    operand_read(&offset);
+    
     cpu.eip = offset.val;
     if (offset.data_size == 16){
         cpu.eip = cpu.eip & 0x0000ffff;
