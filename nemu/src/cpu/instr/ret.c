@@ -38,9 +38,9 @@ make_instr_func(ret_near_imm16)
     cpu.gpr[4].val += imm16.val;
     
     cpu.eip = opr.val;
-/*    if (data_size == 16){
+    if (data_size == 16){
         cpu.eip &= 0x0000ffff;
-    }*/
+    }
     
     return 0;
 }
