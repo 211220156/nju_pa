@@ -9,7 +9,7 @@ static void instr_execute_2op()
     if (opr_src.type == OPR_IMM && opr_src.data_size < opr_dest.data_size){
         opr_src.val = sign_ext(opr_src.val, opr_src.data_size);
     }
-    alu_add(opr_src.val, opr_dest.val, data_size);
+    opr_dest.val = alu_add(opr_src.val, opr_dest.val, data_size);
     operand_write(&opr_dest);
 }
 make_instr_impl_2op(add, i, rm, v)
