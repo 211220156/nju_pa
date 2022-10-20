@@ -52,3 +52,32 @@ make_instr_func(call_near)
     return 1 + data_size / 8;
    
 }
+make_instr_func(call_near_indirect)
+{
+    cpu.gpr[4].val -= 4;
+
+    //将栈顶地址准备好
+    OPERAND top;
+    top.type = OPR_MEM;
+    top.addr = cpu.gpr[4].val;
+    top.data_size = 32;
+    top.sreg = SREG_CS;
+
+    //将eip值（返回地址）写进栈顶地址（入栈）
+    top.val = cpu.eip + 1 + data_size / 8;
+    operand_write(&top);
+    
+    OPERAND rm;
+    rm.data_size = data_size;
+    rm.sreg = SREG_CS;
+    modrm_rm(cpu.eip + 1, &rm);
+    
+    operand_read(&rm);
+    
+    cpu.eip = rm.val;
+    if (rm.data_size == 16){
+        cpu.eip = cpu.eip & 0x0000ffff;
+    }
+    
+    return 0;
+}
