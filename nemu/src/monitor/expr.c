@@ -115,11 +115,12 @@ static bool make_token(char *e)
 				case NUM:
 				{
 				    tokens[nr_token].type = rules[i].token_type;
-				    if (substr_len > 32){
-				        memcpy((void *)tokens[nr_token].str, (void *)substr_start, 32);
-				    } else {
-				        memcpy((void *)tokens[nr_token].str, (void *)substr_start, substr_len);
-				    }
+//				    if (substr_len > 32){
+//				        memcpy((void *)tokens[nr_token].str, (void *)substr_start, 32);
+//				    } else {
+//				        memcpy((void *)tokens[nr_token].str, (void *)substr_start, substr_len);
+//				    }
+                    strcpy(tokens[nr_token].str, substr_start);
 					nr_token++;
 					break;
 				}
@@ -196,7 +197,6 @@ uint32_t eval(int p, int q, bool* success)
                 op = i;
             }
         }
-//        op = the position of dominant operator in the token expression;
         uint32_t val1 = eval(p, op - 1, success);
         uint32_t val2 = eval(op + 1, q, success);
         switch(tokens[op].type) {
