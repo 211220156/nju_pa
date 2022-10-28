@@ -156,7 +156,7 @@ uint32_t expr(char *e, bool *success)
         if(tokens[i].type == '*' && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
             tokens[i].type = DEREF;
         }
-        if (token[i].type == '-' && (i == 0 || tokens[i - 1].type > 261)){
+        if (tokens[i].type == '-' && (i == 0 || tokens[i - 1].type > 261)){
             tokens[i].type = NEG;
         }
     }
