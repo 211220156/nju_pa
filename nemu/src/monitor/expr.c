@@ -16,7 +16,7 @@ enum
 	EQ,
 	NUM,
 	REG,
-	SYMB
+	SYMB,
 
 	/* TODO: Add more token types */
     DIV,
