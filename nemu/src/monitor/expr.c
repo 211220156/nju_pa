@@ -18,16 +18,16 @@ enum
 	REG,
 	SYMB,
     HEX,
-    DEREF,//解引用
-    NEG,//取负数
 	/* TODO: Add more token types */
 	LEFTP,
 	RIGHTP,
+	
+    ADD,
+    SUB,
     DIV,
     MUL,
-    ADD,
-    SUB
-    
+    DEREF,//解引用
+    NEG//取负数
 };
 
 static struct rule
@@ -45,6 +45,7 @@ static struct rule
 	{"0[xX][0-9a-fA-F]{1, 8}", HEX},
     {"-", '-'},	
 	{"\\*", '*'},
+	{"/", DIV},
 	{"\\(", LEFTP},
 	{"\\)", RIGHTP},
 	{"\\+", ADD}
@@ -189,18 +190,24 @@ uint32_t eval(int p, int q, bool* success)
             return 0;
         }
         //下面是正常计算
+        int op = -1;
+        for (int i = p; i <= q; i++){
+            if (op == -1 || (tokens[i].type >= token[op].type)){
+                op = i;
+            }
+        }
 //        op = the position of dominant operator in the token expression;
-//        val1 = eval(p, op - 1);
-//        val2 = eval(op + 1, q);
-//        switch(op_type) {
-//            case '+': return val1 + val2;
- //           case '-':
- //          case '*': 
- //           case '/': 
- //           default: assert(0);
+        uint32_t val1 = eval(p, op - 1, success);
+        uint32_t val2 = eval(op + 1, q, success);
+        switch(op_type) {
+            case ADD: return val1 + val2;
+            case SUB: return val1 - val2;
+            case MUL: return val1 * val2;
+            case DIV: return val1 / val2;
+            default: return 0;
         
-//        }
-        return 0;
+        }
+        
     }
 }
 
