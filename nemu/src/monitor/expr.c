@@ -192,7 +192,7 @@ uint32_t eval(int p, int q, bool* success)
         //下面是正常计算
         int op = -1;
         for (int i = p; i <= q; i++){
-            if (op == -1 || (tokens[i].type >= token[op].type)){
+            if (op == -1 || (tokens[i].type >= tokens[op].type)){
                 op = i;
             }
         }
