@@ -199,7 +199,7 @@ uint32_t eval(int p, int q, bool* success)
 //        op = the position of dominant operator in the token expression;
         uint32_t val1 = eval(p, op - 1, success);
         uint32_t val2 = eval(op + 1, q, success);
-        switch(op_type) {
+        switch(tokens[op].type) {
             case ADD: return val1 + val2;
             case SUB: return val1 - val2;
             case MUL: return val1 * val2;
