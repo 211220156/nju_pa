@@ -152,7 +152,7 @@ uint32_t expr(char *e, bool *success)
 /*	printf("\nPlease implement expr at expr.c\n");
     fflush(stdout);
 	assert(0);*/
-	for(i = 0; i < nr_token; i ++) {
+	for(int i = 0; i < nr_token; i ++) {
         if(tokens[i].type == '*' && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
             tokens[i].type = DEREF;
         }
