@@ -191,9 +191,9 @@ uint32_t eval(int p, int q, bool* success)
         switch(op_type) {
             case '+': return val1 + val2;
             case '-': /* ... */
- /*           case '*': /* ... */
- /*           case '/': /* ... */
- /*           default: assert(0);
+ //          case '*': /* ... */
+ //           case '/': /* ... */
+ //           default: assert(0);
         
         }*/
         return 0;
