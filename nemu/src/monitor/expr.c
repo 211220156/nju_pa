@@ -155,6 +155,10 @@ bool check_parentheses(int p, int q, bool* success)
             }
         }
     }
+    if (top != -1) {
+        *success = false;
+        return false;
+    }
     if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP)
         return true;
     else 
