@@ -195,7 +195,7 @@ uint32_t eval(int p, int q, bool* success)
  //           case '/': /* ... */
  //           default: assert(0);
         
-        }*/
+//        }
         return 0;
     }
 }
