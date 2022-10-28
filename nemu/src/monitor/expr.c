@@ -120,7 +120,7 @@ static bool make_token(char *e)
 //				    } else {
 //				        memcpy((void *)tokens[nr_token].str, (void *)substr_start, substr_len);
 //				    }
-                    strcpy(tokens[nr_token].str, substr_start);
+                    strncpy(tokens[nr_token].str, substr_start, substr_len);
 					nr_token++;
 					break;
 				}
@@ -144,7 +144,7 @@ static bool make_token(char *e)
 }
 bool check_parentheses(int p, int q, bool* success)
 {
-    int stk[10], top = -1, lastOutP = 0;
+    int stk[1000], top = -1, lastOutP = 0;
     for (int i = p; i <= q; i++){
         if (tokens[i].type == LEFTP)
             stk[++top] = i;
