@@ -300,7 +300,7 @@ void ui_mainloop(bool autorun)
 
 		// the remaining part of user_cmd is considered as arguments
 		char *args = user_cmd + strlen(cmd) + 1;
-		args += strspn(args, " ");
+		args += strspn(args, " ");//strspn返回args中第一个不在" "中出现的下标，这里是排除args前面空格的意思
 		if (args >= user_cmd_end)
 		{
 			// there is no argument
