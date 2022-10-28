@@ -43,8 +43,8 @@ static struct rule
 	{" +", NOTYPE}, // white space
 	{"[0-9]{1,10}", NUM},
 	{"0[xX][0-9a-fA-F]{1, 8}", HEX},
-    {"-", '-'},	
-	{"\\*", '*'},
+    {"-", SUB},	
+	{"\\*", MUL},
 	{"/", DIV},
 	{"\\(", LEFTP},
 	{"\\)", RIGHTP},
@@ -150,7 +150,7 @@ bool check_parentheses(int p, int q, bool* success)
             stk[++top] = i;
         else if (tokens[i].type == RIGHTP) {
             if (top != -1)
-                lastOutP = stk[top--];
+                lastOutP = stk[top--];//左括号出栈
             else {//出现多出来的右括号
                 *success = false;
                 return false; 
@@ -201,7 +201,8 @@ uint32_t eval(int p, int q, bool* success)
                     inParentheses = true;
                 else if (tokens[i].type == RIGHTP)
                     inParentheses = false;
-                if (tokens[i].type > 263 && tokens[i].type < tokens[op].type && !inParentheses)//优先级底且不在括号里
+                else if (tokens[i].type > 263 && tokens[i].type < tokens[op].type && !inParentheses)
+                    //优先级底且不在括号里
                     op = i;
             }
         }
