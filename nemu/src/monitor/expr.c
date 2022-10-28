@@ -20,7 +20,7 @@ enum
     HEX,
 	/* TODO: Add more token types */
 	LEFTP,
-	RIGHTP,
+	RIGHTP,//263
 	
     ADD,
     SUB,
@@ -192,9 +192,17 @@ uint32_t eval(int p, int q, bool* success)
         }
         //下面是正常计算
         int op = -1;
+        bool inParentheses = false;
         for (int i = p; i <= q; i++){
-            if (op == -1 || (tokens[i].type >= tokens[op].type)){
+            if (op == -1 && tokens[i].type > 263){
                 op = i;
+            } else {
+                if (tokens[i].type == LEFTP)
+                    inParentheses = true;
+                else if (tokens[i].type == RIGHTP)
+                    inParentheses = false;
+                if (tokens[i].type > 263 && tokens[i].type < tokens[op].type && !inParentheses)//优先级底且不在括号里
+                    op = i;
             }
         }
         uint32_t val1 = eval(p, op - 1, success);
