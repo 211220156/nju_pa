@@ -185,11 +185,11 @@ uint32_t eval(int p, int q, bool* success)
             return 0;
         }
         //下面是正常计算
-/*        op = the position of dominant operator in the token expression;
-        val1 = eval(p, op - 1);
-        val2 = eval(op + 1, q);
-        switch(op_type) {
-            case '+': return val1 + val2;
+//        op = the position of dominant operator in the token expression;
+//        val1 = eval(p, op - 1);
+//        val2 = eval(op + 1, q);
+//        switch(op_type) {
+//            case '+': return val1 + val2;
  //           case '-':
  //          case '*': 
  //           case '/': 
