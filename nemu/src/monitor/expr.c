@@ -177,7 +177,7 @@ uint32_t eval(int p, int q, bool* success)
         /* The expression is surrounded by a matched pair of parentheses. 
          * If that is the case, just throw away the parentheses.
          */
-        return eval(p + 1, q - 1); 
+        return eval(p + 1, q - 1, success); 
     }
     else {
         //check返回false有两种可能：一种是表达式不合法，这时候success也会变成false，另一种是表达式合法，正常计算
