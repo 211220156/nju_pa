@@ -140,29 +140,6 @@ static bool make_token(char *e)
 
 	return true;
 }
-
-uint32_t expr(char *e, bool *success)
-{
-	if (!make_token(e))
-	{
-		*success = false;
-		return 0;
-	}
-
-/*	printf("\nPlease implement expr at expr.c\n");
-    fflush(stdout);
-	assert(0);*/
-	for(int i = 0; i < nr_token; i ++) {
-        if(tokens[i].type == '*' && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
-            tokens[i].type = DEREF;
-        }
-        if (tokens[i].type == '-' && (i == 0 || tokens[i - 1].type > 261)){
-            tokens[i].type = NEG;
-        }
-    }
-    
-	return eval(0, nr_token - 1, success);
-}
 bool check_parentheses(int p, int q, bool* success)
 {
     int stk[1000], top = -1, lastOutP = 0;
@@ -221,5 +198,28 @@ uint32_t eval(int p, int q, bool* success)
         }*/
         return 0;
     }
+}
+
+uint32_t expr(char *e, bool *success)
+{
+	if (!make_token(e))
+	{
+		*success = false;
+		return 0;
+	}
+
+/*	printf("\nPlease implement expr at expr.c\n");
+    fflush(stdout);
+	assert(0);*/
+	for(int i = 0; i < nr_token; i ++) {
+        if(tokens[i].type == '*' && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
+            tokens[i].type = DEREF;
+        }
+        if (tokens[i].type == '-' && (i == 0 || tokens[i - 1].type > 261)){
+            tokens[i].type = NEG;
+        }
+    }
+    
+	return eval(0, nr_token - 1, success);
 }
 
