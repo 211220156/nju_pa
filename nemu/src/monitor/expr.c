@@ -41,14 +41,14 @@ static struct rule
 	 */
 
 	{" +", NOTYPE}, // white space
+	{"\\+", ADD},
 	{"[0-9]{1,10}", NUM},
 	{"0[xX][0-9a-fA-F]{1, 8}", HEX},
     {"-", SUB},	
 	{"\\*", MUL},
 	{"/", DIV},
 	{"\\(", LEFTP},
-	{"\\)", RIGHTP},
-	{"\\+", ADD}
+	{"\\)", RIGHTP}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]))
