@@ -120,7 +120,8 @@ static bool make_token(char *e)
 //				    } else {
 //				        memcpy((void *)tokens[nr_token].str, (void *)substr_start, substr_len);
 //				    }
-                    strncpy(tokens[nr_token].str, substr_start, substr_len);
+                //    strncpy(tokens[nr_token].str, substr_start, substr_len);
+                    memcpy((void *)tokens[nr_token].str, (void *)substr_start, substr_len);
 					nr_token++;
 					break;
 				}
