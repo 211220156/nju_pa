@@ -168,7 +168,6 @@ uint32_t eval(int p, int q, bool* success)
 {
     if(p > q) {
         if (tokens[p].type == NEG){
-            printf("NEG!!");
             return 0;
         }
         *success = false;
