@@ -42,11 +42,11 @@ static struct rule
 
 	{" +", NOTYPE}, // white space
 	{"\\+", ADD},
-	{"0[xX][0-9a-fA-F]{1, 8}", HEX},
-	{"[0-9]{1,10}", NUM},
-	
-    {"-", SUB},	
 	{"\\*", MUL},
+	{"[0-9]{1,10}", NUM},
+	{"0[xX][0-9a-fA-F]{1, 8}", HEX},
+    {"-", SUB},	
+	
 	{"/", DIV},
 	{"\\(", LEFTP},
 	{"\\)", RIGHTP}
