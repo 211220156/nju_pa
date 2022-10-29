@@ -162,12 +162,14 @@ bool check_parentheses(int p, int q, bool* success)
         *success = false;
         return false;
     }
-    if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP)
+    if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP){
         printf("true!");
         return true;
-    else 
+    }
+    else {
         printf("false!");
         return false;
+    }
 }
 uint32_t eval(int p, int q, bool* success)
 {
