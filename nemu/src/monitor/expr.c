@@ -255,7 +255,7 @@ uint32_t expr(char *e, bool *success)
         if(tokens[i].type == MUL && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
             tokens[i].type = DEREF;
         }
-        if (tokens[i].type == NEG && (i == 0 || tokens[i - 1].type > 261)){
+        if (tokens[i].type == SUB && (i == 0 || tokens[i - 1].type > 261)){
             tokens[i].type = NEG;
         }
     }
