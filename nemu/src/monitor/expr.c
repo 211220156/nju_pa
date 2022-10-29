@@ -83,7 +83,59 @@ typedef struct token
 
 Token tokens[32];
 int nr_token;
+static bool make_token(char *e)
+{
+	int position = 0;
+	int i;
+	regmatch_t pmatch;
 
+	nr_token = 0;
+
+	while (e[position] != '\0')
+	{
+		/* Try all rules one by one. */
+		for (i = 0; i < NR_REGEX; i++)
+		{
+			if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0)
+			{
+				char *substr_start = e + position;
+				int substr_len = pmatch.rm_eo;
+
+				printf("match regex[%d] at position %d with len %d: %.*s", i, position, substr_len, substr_len, substr_start);
+				position += substr_len;
+
+				/* TODO: Now a new token is recognized with rules[i]. 
+				 * Add codes to perform some actions with this token.
+				 */
+
+				switch (rules[i].token_type)
+				{
+				case HEX:
+				case NUM:
+				{
+				    tokens[nr_token].type = rules[i].token_type;
+                    strncpy(tokens[nr_token].str, substr_start, substr_len);
+					nr_token++;
+					break;
+				}
+				default:
+					tokens[nr_token].type = rules[i].token_type;
+					nr_token++;
+				}
+                printf("token_type: %d", token_type);
+				break;
+			}
+		}
+
+		if (i == NR_REGEX)
+		{
+			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
+			return false;
+		}
+	}
+
+	return true;
+}
 
 bool check_parentheses(int p, int q, bool* success)
 {
@@ -172,17 +224,16 @@ uint32_t eval(int p, int q, bool* success)
 
 uint32_t expr(char *e, bool *success)
 {
-/*	if (!make_token(e))
+	if (!make_token(e))
 	{
 		*success = false;
 		return 0;
-	}*/
+	}
     printf("make_token ok!\n");
-    return 1;
 /*	printf("\nPlease implement expr at expr.c\n");
     fflush(stdout);
 	assert(0);*/
-/*	for(int i = 0; i < nr_token; i ++) {
+	for(int i = 0; i < nr_token; i ++) {
         if(tokens[i].type == '*' && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
             tokens[i].type = DEREF;
         }
@@ -191,6 +242,6 @@ uint32_t expr(char *e, bool *success)
         }
     }
     
-	return eval(0, nr_token - 1, success);*/
+	return eval(0, nr_token - 1, success);
 }
 
