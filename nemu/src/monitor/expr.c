@@ -210,22 +210,10 @@ uint32_t eval(int p, int q, bool* success)
         uint32_t val1 = eval(p, op - 1, success);
         uint32_t val2 = eval(op + 1, q, success);
         switch(tokens[op].type) {
-            case ADD: {
-                printf("in ADD!\n");
-                return val1 + val2;
-            }
-            case SUB: {
-                printf("in SUB!\n");
-                return val1 - val2;
-            }
-            case MUL: {
-                printf("in MUL!\n");
-                return val1 * val2;
-            }
-            case DIV: {
-                printf("in DIV!\n");
-                return val1 / val2;
-            }
+            case ADD: return val1 + val2;
+            case SUB: return val1 - val2;
+            case MUL: return val1 * val2;
+            case DIV: return val1 / val2;
             default: return 0;
         
         }
@@ -241,7 +229,6 @@ uint32_t expr(char *e, bool *success)
 		*success = false;
 		return 0;
 	}
-    printf("make_token ok!\n");
 /*	printf("\nPlease implement expr at expr.c\n");
     fflush(stdout);
 	assert(0);*/
