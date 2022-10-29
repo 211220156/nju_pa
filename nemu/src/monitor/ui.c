@@ -114,6 +114,29 @@ p_error:
 	puts("Command format: \"p EXPR\"");
 	return 0;
 }
+cmd_handler(cmd_ph)
+{
+	if (args == NULL)
+	{
+		goto ph_error;
+	}
+
+	bool success;
+	uint32_t val = expr(args, &success);
+	if (!success)
+	{
+		printf("invalid expression: '%s'\n", args);
+	}
+	else
+	{
+		printf("%x\n", val);
+	}
+	return 0;
+
+ph_error:
+	puts("Command format: \"ph EXPR\"");
+	return 0;
+}
 
 uint32_t look_up_fun_symtab(char *, bool *);
 
