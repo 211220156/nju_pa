@@ -140,7 +140,7 @@ static bool make_token(char *e)
 
 bool check_parentheses(int p, int q, bool* success)
 {
-    printf("in check!\n");
+//    printf("in check!\n");
     int stk[32], top = -1, lastOutP = 0;
     for (int i = p; i <= q; i++){
         if (tokens[i].type == LEFTP)
@@ -159,17 +159,17 @@ bool check_parentheses(int p, int q, bool* success)
         return false;
     }
     if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP){
-        printf("true!\n");
+//        printf("true!\n");
         return true;
     }
     else {
-        printf("false!\n");
+//        printf("false!\n");
         return false;
     }
 }
 uint32_t eval(int p, int q, bool* success)
 {
-    printf("in eval!\n");
+//    printf("in eval!\n");
     if(p > q) {
         *success = false;
         return 0;
@@ -211,10 +211,22 @@ uint32_t eval(int p, int q, bool* success)
         uint32_t val1 = eval(p, op - 1, success);
         uint32_t val2 = eval(op + 1, q, success);
         switch(tokens[op].type) {
-            case ADD: return val1 + val2;
-            case SUB: return val1 - val2;
-            case MUL: return val1 * val2;
-            case DIV: return val1 / val2;
+            case ADD: {
+                printf("in ADD!\n");
+                return val1 + val2;
+            }
+            case SUB: {
+                printf("in SUB!\n");
+                return val1 - val2;
+            }
+            case MUL: {
+                printf("in MUL!\n");
+                return val1 * val2;
+            }
+            case DIV: {
+                printf("in DIV!\n");
+                return val1 / val2;
+            }
             default: return 0;
         
         }
