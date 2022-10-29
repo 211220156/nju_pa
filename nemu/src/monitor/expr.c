@@ -197,10 +197,10 @@ uint32_t eval(int p, int q, bool* success)
             return 0;
         }
         //下面是正常计算
-        int op = p;
+/*      int op = 0;
         bool inParentheses = false;
         for (int i = p; i <= q; i++){
-            if (op == p && tokens[i].type > 263){
+            if (op == 0 && tokens[i].type > 263){
                 op = i;
             } else {
                 if (tokens[i].type == LEFTP)
@@ -221,7 +221,8 @@ uint32_t eval(int p, int q, bool* success)
             case DIV: return val1 / val2;
             default: return 0;
         
-        }
+        }*/
+        return 0;
         
     }
 }
