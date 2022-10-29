@@ -166,8 +166,10 @@ bool check_parentheses(int p, int q, bool* success)
 }
 uint32_t eval(int p, int q, bool* success)
 {
-//    printf("in eval!\n");
     if(p > q) {
+        if (tokens[p].type == NEG){
+            return 0;
+        }
         *success = false;
         return 0;
     }
@@ -227,6 +229,7 @@ uint32_t eval(int p, int q, bool* success)
         uint32_t val2 = eval(op + 1, q, success);
         switch(tokens[op].type) {
             case ADD: return val1 + val2;
+            case NEG:
             case SUB: return val1 - val2;
             case MUL: return val1 * val2;
             case DIV: return val1 / val2;
