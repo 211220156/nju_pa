@@ -40,15 +40,16 @@ static struct rule
 	 * Pay attention to the precedence level of different rules.
 	 */
 
-	{" +", NOTYPE}, // white space
+	{" +", NOTYPE}, // white space	
+	{"0[xX][0-9a-fA-F]{1,8}", HEX},
 	{"[0-9]{1,10}", NUM},
 	{"\\*", MUL},
     {"-", SUB},	
 	{"/", DIV},
 	{"\\(", LEFTP},
 	{"\\)", RIGHTP},
-	{"\\+", ADD},
-	{"0[xX][0-9a-fA-F]{1,8}", HEX}
+	{"\\+", ADD}
+
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]))
