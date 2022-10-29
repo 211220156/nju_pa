@@ -203,6 +203,13 @@ uint32_t eval(int p, int q, bool* success)
             }
             return temp;
         }
+        case REG:
+        {
+            if (tokens[p].str == "$eax")
+                return cpu.eax;
+            else
+                return 0;
+        }
         default:
             return 0;
         }
