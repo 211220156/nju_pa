@@ -99,7 +99,7 @@ cmd_handler(cmd_p)
 	//if(args + strspn(args, " ") >= cmd_end) { goto p_error; }
 
 	bool success;
-	printf("in p!\n");
+//	printf("in p!\n");
 	uint32_t val = expr(args, &success);
 	if (!success)
 	{
@@ -288,7 +288,7 @@ void ui_mainloop(bool autorun)
 
 	while (true)
 	{
-	    printf("in main loop!\n");
+//	    printf("in main loop!\n");
 		// read user command
 		char *user_cmd = rl_gets();
 		char *user_cmd_end = user_cmd + strlen(user_cmd);
