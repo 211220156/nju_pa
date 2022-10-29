@@ -122,7 +122,7 @@ static bool make_token(char *e)
 					tokens[nr_token].type = rules[i].token_type;
 					nr_token++;
 				}
-                printf("token_type: %d", token_type);
+                printf("token_type: %d", tokens[nr_token - 1].type);
 				break;
 			}
 		}
