@@ -176,7 +176,25 @@ uint32_t eval(int p, int q, bool* success)
          * For now this token should be a number. 
          * Return the value of the number.
          */ 
-        return atoi(tokens[p].str);
+        switch (tokens[p].type) {
+        case NUM: 
+            return atoi(tokens[p].str);
+        case HEX: {
+            int temp = 0;
+            for (int i = 2; ; i < strlen(tokens[p].str); i++){
+                temp *= 16;
+                if (tokens[p].str[i] >= 65 && tokens[p].str[i] <= 90)//大写字母
+                    temp += tokens[p].str[i] - 'A';
+                else if (tokens[p].str[i] >= 97 && tokens[p].str[i] <= 122)//小写字母
+                    temp += tokens[p].str[i] - 'a';
+                else 
+                    temp += tokens[p].str[i] - '0';
+            }
+            return temp;
+        }
+        default:
+            return 0;
+        }
     }
     else if(check_parentheses(p, q, success) == true ) {
         /* The expression is surrounded by a matched pair of parentheses. 
