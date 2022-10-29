@@ -144,6 +144,7 @@ static bool make_token(char *e)
 }
 bool check_parentheses(int p, int q, bool* success)
 {
+    printf("in check!\n");
     int stk[1000], top = -1, lastOutP = 0;
     for (int i = p; i <= q; i++){
         if (tokens[i].type == LEFTP)
@@ -162,12 +163,15 @@ bool check_parentheses(int p, int q, bool* success)
         return false;
     }
     if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP)
+        printf("true!");
         return true;
     else 
+        printf("false!");
         return false;
 }
 uint32_t eval(int p, int q, bool* success)
 {
+    printf("in eval!\n");
     if(p > q) {
         *success = false;
         return 0;
