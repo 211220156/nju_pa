@@ -163,11 +163,11 @@ bool check_parentheses(int p, int q, bool* success)
         return false;
     }
     if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP){
-        printf("true!");
+        printf("true!\n");
         return true;
     }
     else {
-        printf("false!");
+        printf("false!\n");
         return false;
     }
 }
