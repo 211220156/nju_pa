@@ -230,10 +230,11 @@ uint32_t expr(char *e, bool *success)
 		return 0;
 	}
     printf("make_token ok!\n");
+    return 1;
 /*	printf("\nPlease implement expr at expr.c\n");
     fflush(stdout);
 	assert(0);*/
-	for(int i = 0; i < nr_token; i ++) {
+/*	for(int i = 0; i < nr_token; i ++) {
         if(tokens[i].type == '*' && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
             tokens[i].type = DEREF;
         }
@@ -242,6 +243,6 @@ uint32_t expr(char *e, bool *success)
         }
     }
     
-	return eval(0, nr_token - 1, success);
+	return eval(0, nr_token - 1, success);*/
 }
 
