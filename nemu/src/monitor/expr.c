@@ -1,5 +1,6 @@
 #include "nemu.h"
 #include "cpu/reg.h"
+#include "cpu/cpu.h"
 #include "memory/memory.h"
 
 #include <stdlib.h>
@@ -205,7 +206,7 @@ uint32_t eval(int p, int q, bool* success)
         }
         case REG:
         {
-            if (tokens[p].str == "$eax")
+            if (strcmp(tokens[p].str, "$eax") == 0)
                 return cpu.eax;
             else
                 return 0;
