@@ -205,14 +205,31 @@ uint32_t eval(int p, int q, bool* success)
             return temp;
         }
         case REG:
-        {
-            printf("REG!!here!\n");
-            if (strcmp(tokens[p].str, "$eax") == 0){
-                printf("cpu eax\n");
-                return cpu.eax;
-            }
-            else
-                return 0;
+        {   //实际gpr顺序:eax ecx edx ebx esp ebp esi edi
+            if (strcmp(tokens[p].str, "$eax") == 0) return cpu.eax;
+            if (strcmp(tokens[p].str, "$ebx") == 0) return cpu.ebx;
+            if (strcmp(tokens[p].str, "$ecx") == 0) return cpu.ecx;
+            if (strcmp(tokens[p].str, "$edx") == 0) return cpu.edx;
+            if (strcmp(tokens[p].str, "$esp") == 0) return cpu.esp;
+            if (strcmp(tokens[p].str, "$ebp") == 0) return cpu.ebp;
+            if (strcmp(tokens[p].str, "$esi") == 0) return cpu.esi;
+            if (strcmp(tokens[p].str, "$edi") == 0) return cpu.edi;
+            if (strcmp(tokens[p].str, "$ax") == 0) return cpu.gpr[0]._16;
+            if (strcmp(tokens[p].str, "$cx") == 0) return cpu.gpr[1]._16;
+            if (strcmp(tokens[p].str, "$dx") == 0) return cpu.gpr[2]._16;
+            if (strcmp(tokens[p].str, "$bx") == 0) return cpu.gpr[3]._16;
+            if (strcmp(tokens[p].str, "$sp") == 0) return cpu.gpr[4]._16;
+            if (strcmp(tokens[p].str, "$bp") == 0) return cpu.gpr[5]._16;
+            if (strcmp(tokens[p].str, "$si") == 0) return cpu.gpr[6]._16;
+            if (strcmp(tokens[p].str, "$di") == 0) return cpu.gpr[7]._16;
+            if (strcmp(tokens[p].str, "$al") == 0) return cpu.gpr[0]._8[0];//？
+            if (strcmp(tokens[p].str, "$cl") == 0) return cpu.gpr[1]._8[0];
+            if (strcmp(tokens[p].str, "$dl") == 0) return cpu.gpr[2]._8[0];
+            if (strcmp(tokens[p].str, "$bl") == 0) return cpu.gpr[3]._8[0];
+            if (strcmp(tokens[p].str, "$ah") == 0) return cpu.gpr[0]._8[1];//？
+            if (strcmp(tokens[p].str, "$ch") == 0) return cpu.gpr[1]._8[1];
+            if (strcmp(tokens[p].str, "$dh") == 0) return cpu.gpr[2]._8[1];
+            if (strcmp(tokens[p].str, "$bh") == 0) return cpu.gpr[3]._8[1];
         }
         default:
             return 0;
