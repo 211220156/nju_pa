@@ -28,7 +28,7 @@ enum
     MUL,
     DEREF,//解引用
     NEG//取负数
-};
+} token_type;
 
 static struct rule
 {
@@ -222,7 +222,7 @@ uint32_t eval(int p, int q, bool* success)
             default: return 0;
         
         }*/
-        return 0;
+        return 1;
         
     }
 }
