@@ -206,6 +206,7 @@ uint32_t eval(int p, int q, bool* success)
         }
         case REG:
         {
+            printf("REG!!here!");
             if (strcmp(tokens[p].str, "$eax") == 0)
                 return cpu.eax;
             else
