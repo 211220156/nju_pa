@@ -120,7 +120,7 @@ static bool make_token(char *e)
 					break;
 				}
 				case NOTYPE:
-				    break;
+				    break;//空格直接丢弃
 				default:
 					tokens[nr_token].type = rules[i].token_type;
 					nr_token++;
@@ -159,14 +159,10 @@ bool check_parentheses(int p, int q, bool* success)
         *success = false;
         return false;
     }
-    if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP){
-//        printf("true!\n");
+    if (lastOutP == p && tokens[p].type == LEFTP && tokens[q].type == RIGHTP)
         return true;
-    }
-    else {
-//        printf("false!\n");
+    else 
         return false;
-    }
 }
 uint32_t eval(int p, int q, bool* success)
 {
