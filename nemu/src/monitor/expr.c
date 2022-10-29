@@ -181,7 +181,7 @@ uint32_t eval(int p, int q, bool* success)
             return atoi(tokens[p].str);
         case HEX: {
             int temp = 0;
-            for (int i = 2; ; i < strlen(tokens[p].str); i++){
+            for (int i = 2;  i < strlen(tokens[p].str); i++){
                 temp *= 16;
                 if (tokens[p].str[i] >= 65 && tokens[p].str[i] <= 90)//大写字母
                     temp += tokens[p].str[i] - 'A';
