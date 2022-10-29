@@ -43,6 +43,14 @@ static struct rule
 	{" +", NOTYPE}, // white space	
 	{"0[xX][0-9a-fA-F]{1,8}", HEX},
 	{"[0-9]{1,10}", NUM},
+	{"\\$e[abcd]x", REG},
+	{"\\$e[sb]p", REG},
+	{"\\$e[sd]i", REG},
+	{"\\$[abcd]x", REG},
+	{"\\$[abcd]l", REG},
+	{"\\$[abcd]h", REG},
+	{"\\$[sb]p", REG},
+	{"\\$[sd]i", REG},
 	{"\\*", MUL},
     {"-", SUB},	
 	{"/", DIV},
@@ -111,6 +119,7 @@ static bool make_token(char *e)
 
 				switch (rules[i].token_type)
 				{
+				case REG:
 				case HEX:
 				case NUM:
 				{
