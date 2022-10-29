@@ -129,7 +129,7 @@ cmd_handler(cmd_ph)
 	}
 	else
 	{
-		printf("%x\n", val);
+		printf("0x%x\n", val);
 	}
 	return 0;
 
