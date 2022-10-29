@@ -48,7 +48,7 @@ static struct rule
 	{"\\(", LEFTP},
 	{"\\)", RIGHTP},
 	{"\\+", ADD},
-	{"0[xX][0-9a-fA-F]{1, 8}", HEX}
+	{"0[xX][0-9a-fA-F]{1,8}", HEX}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]))
