@@ -120,8 +120,7 @@ static bool make_token(char *e)
 //				    } else {
 //				        memcpy((void *)tokens[nr_token].str, (void *)substr_start, substr_len);
 //				    }
-                //    strncpy(tokens[nr_token].str, substr_start, substr_len);
-                    memcpy((void *)tokens[nr_token].str, (void *)substr_start, substr_len);
+                    strncpy(tokens[nr_token].str, substr_start, substr_len);
 					nr_token++;
 					break;
 				}
@@ -198,7 +197,7 @@ uint32_t eval(int p, int q, bool* success)
             return 0;
         }
         //下面是正常计算
-        int op = -1;
+        int op = 0;
         bool inParentheses = false;
         for (int i = p; i <= q; i++){
             if (op == -1 && tokens[i].type > 263){
