@@ -21,7 +21,7 @@ enum
     HEX,
 	/* TODO: Add more token types */
 	LEFTP,
-	RIGHTP,//263
+	RIGHTP,//262
 	EQ,
     ADD,
     SUB,
@@ -251,14 +251,14 @@ uint32_t eval(int p, int q, bool* success)
         int op = 0;
         bool inParentheses = false;
         for (int i = p; i <= q; i++){
-            if (op == 0 && tokens[i].type > 263){
+            if (op == 0 && tokens[i].type > 262){
                 op = i;
             } else {
                 if (tokens[i].type == LEFTP)
                     inParentheses = true;
                 else if (tokens[i].type == RIGHTP)
                     inParentheses = false;
-                else if (tokens[i].type > 263 && tokens[i].type < tokens[op].type && !inParentheses)
+                else if (tokens[i].type > 262 && tokens[i].type < tokens[op].type && !inParentheses)
                     //优先级底且不在括号里
                     op = i;
             }
@@ -293,10 +293,10 @@ uint32_t expr(char *e, bool *success)
     fflush(stdout);
 	assert(0);*/
 	for(int i = 0; i < nr_token; i ++) {
-        if(tokens[i].type == MUL && (i == 0 || tokens[i - 1].type > 261)) {//若*前一位是运算符（>261） 
+        if(tokens[i].type == MUL && (i == 0 || tokens[i - 1].type > 260)) {//若*前一位是运算符（>260） 
             tokens[i].type = DEREF;
         }
-        if (tokens[i].type == SUB && (i == 0 || tokens[i - 1].type > 261)){
+        if (tokens[i].type == SUB && (i == 0 || tokens[i - 1].type > 260)){
             tokens[i].type = NEG;
         }
     }
