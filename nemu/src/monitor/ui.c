@@ -148,7 +148,7 @@ cmd_handler(cmd_x)
 	bool success;
 	int len = 0;
 	while (args[len] != ' ') { len++; }
-	char *N = NULL;
+	char N[32];
 	strncpy(N, args, len);
 	args[len] = '*';
 	args += len;
