@@ -154,8 +154,8 @@ cmd_handler(cmd_x)
 	char NewArgs[32];
 	for (int i = 1; i <= times; i++){
 	    sprintf(NewArgs, "%d", argsNum);
-	    int digit = 0;
-	    while (argsNum > 0) { argsNum /= 10; digit++;  }
+	    int digit = 0, temp = argsNum;
+	    while (temp > 0) { temp /= 10; digit++;  }
 	    memmove(NewArgs + 1, NewArgs, digit);
         NewArgs[0] = '*';
         NewArgs[digit + 1] = '\0';
