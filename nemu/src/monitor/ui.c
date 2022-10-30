@@ -145,7 +145,7 @@ cmd_handler(cmd_x)
 	}
 	//if(args + strspn(args, " ") >= cmd_end) { goto p_error; }
 
-	bool success;
+	bool success = true;
 	int len = 0;
 	while (args[len] != ' ') { len++; }
 	char N[32];
