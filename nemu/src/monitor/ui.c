@@ -151,7 +151,7 @@ cmd_handler(cmd_x)
 	char N[32];
 	strncpy(N, args, len);
 	int times = atoi(N), argsNum = atoi(args + len + 1);
-	char NewArgs[32];
+	char *NewArgs;
 	for (int i = 1; i <= times; i++){
 	    sprintf(NewArgs, "%d", argsNum);
 	    NewArgs = strcat("*", NewArgs);
