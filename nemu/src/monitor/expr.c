@@ -269,7 +269,9 @@ uint32_t eval(int p, int q, bool* success)
             case ADD: return val1 + val2;
             case NEG:
             case SUB: return val1 - val2;
-            case DEREF: return *val2;
+            case DEREF: {
+                
+            }
             case MUL: return val1 * val2;
             case DIV: return val1 / val2;
             case EQ: return val1 == val2;
