@@ -155,11 +155,11 @@ cmd_handler(cmd_x)
 	for (int i = 1; i <= times; i++){
 	    sprintf(NewArgs, "%d", argsNum);
 	    int digit = 0, temp = argsNum;
-	    while (temp > 0) { temp /= 10; digit++;  }
+	    while (temp > 0) { temp /= 10; digit++;  }//统计位数
 	    memmove(NewArgs + 1, NewArgs, digit);
-        NewArgs[0] = '*';
+        NewArgs[0] = '*';//拼接上解引用符
         NewArgs[digit + 1] = '\0';
-        printf("%s\n", NewArgs);
+//        printf("%s\n", NewArgs);
     	uint32_t val = expr(NewArgs, &success);
     	if (!success)
     	{
