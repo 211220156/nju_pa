@@ -117,7 +117,7 @@ static bool make_token(char *e)
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 
-//				printf("match regex[%d] at position %d with len %d: %.*s\n", i, position, substr_len, substr_len, substr_start);
+				printf("match regex[%d] at position %d with len %d: %.*s\n", i, position, substr_len, substr_len, substr_start);
 				position += substr_len;
 
 				/* TODO: Now a new token is recognized with rules[i]. 
@@ -202,6 +202,7 @@ uint32_t eval(int p, int q, bool* success)
 {
     if(p > q) {
         if (tokens[p].type == NEG || tokens[p].type == DEREF){
+            printf("NEG -> 0!!!!!!!!!!!!!!!!!!\n");
             return 0;
         }
         *success = false;
@@ -291,8 +292,11 @@ uint32_t eval(int p, int q, bool* success)
                     op = i;
             }
         }
+        printf("op = %d\n", op);
         uint32_t val1 = eval(p, op - 1, success);
+        printf("val1 : %d  p : %d  q : %d\n ", val1, p, op - 1);
         uint32_t val2 = eval(op + 1, q, success);
+        printf("val2 : %d  p : %d  q : %d\n", val2, op + 1, q);
         switch(tokens[op].type) {
             case ADD: return val1 + val2;
             case NEG:
@@ -323,6 +327,7 @@ uint32_t expr(char *e, bool *success)
             tokens[i].type = DEREF;
         }
         if (tokens[i].type == SUB && (i == 0 || tokens[i - 1].type > 260)){
+            printf("i = %d NEG\n", i);
             tokens[i].type = NEG;
         }
     }
