@@ -136,14 +136,15 @@ static bool make_token(char *e)
 				case HEX:
 				case NUM:
 				{
-				    strcpy(tokens[nr_token].str, "");
-				    printf("prev tokens[nr_token].str: %s\n", tokens[nr_token].str);
 				    tokens[nr_token].type = rules[i].token_type;
-				    if (substr_len <= 32)
+				    if (substr_len <= 32) {
                         strncpy(tokens[nr_token].str, substr_start, substr_len);
-                    else
+                        tokens[nr_token].str[substr_len] = '\0';
+				    }
+                    else {
                         strncpy(tokens[nr_token].str, substr_start, 32);
-                    printf("after      tokens[nr_token].str: %s\n", tokens[nr_token].str);
+                    }
+                    printf("tokens[nr_token].str : %s\n",tokens[nr_token].str);
 					nr_token++;
 					break;
 				}
