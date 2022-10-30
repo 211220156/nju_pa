@@ -149,11 +149,9 @@ cmd_handler(cmd_x)
 	int len = 0;
 	while (args[len] != ' ') { len++; }
 	char N[32];
-	N[0] = '\0';
 	strncpy(N, args, len);
 	int times = atoi(N), argsNum = atoi(args + len + 1);
 	char NewArgs[32];
-	NewArgs[0] = '\0';
 	for (int i = 1; i <= times; i++){
 	    sprintf(NewArgs, "%d", argsNum);
 	    memmove(NewArgs + 1, NewArgs, strlen(NewArgs));
