@@ -158,7 +158,7 @@ cmd_handler(cmd_x)
 	    while (argsNum > 0) { argsNum /= 10; digit++;  }
 	    memmove(NewArgs + 1, NewArgs, digit);
         NewArgs[0] = '*';
-        NewArgs[digit] = '\0';
+        NewArgs[digit + 1] = '\0';
         printf("%s\n", NewArgs);
     	uint32_t val = expr(NewArgs, &success);
     	if (!success)
