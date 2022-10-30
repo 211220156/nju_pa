@@ -107,11 +107,6 @@ static bool make_token(char *e)
     
 
 	nr_token = 0;
-    for (int i = 0; i < 32; i++){
-//        printf("prev: %s \n ", tokens[i].str);
-        strcpy(tokens[i].str, "");
-//        printf("curr: %s \n ", tokens[i].str);
-    }
 	while (e[position] != '\0')
 	{
 		/* Try all rules one by one. */
@@ -122,7 +117,7 @@ static bool make_token(char *e)
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 
-				printf("match regex[%d] at position %d with len %d: %.*s\n", i, position, substr_len, substr_len, substr_start);
+//				printf("match regex[%d] at position %d with len %d: %.*s\n", i, position, substr_len, substr_len, substr_start);
 				position += substr_len;
 
 				/* TODO: Now a new token is recognized with rules[i]. 
