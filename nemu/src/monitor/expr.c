@@ -125,7 +125,7 @@ static bool make_token(char *e)
 				 * Add codes to perform some actions with this token.
 				 */
 
-                tokens[nr_token].str[0] = '\0';
+                strcpy(tokens[nr_token].str, "");
 				switch (rules[i].token_type)
 				{
 				case SYMB:
