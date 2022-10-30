@@ -275,6 +275,7 @@ uint32_t eval(int p, int q, bool* success)
         if (*success == false){
             return 0;
         }
+        printf("in eval22222!\n");
         //下面是正常计算
         int op = 0;
         bool inParentheses = false;
