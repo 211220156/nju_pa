@@ -60,7 +60,7 @@ static struct rule
 	{"\\)", RIGHTP},
 	{"\\+", ADD},
 	{"==", EQ},
-	{"[0-9a-zA-Z]+", SYMB}
+	{"[0-9a-zA-Z_]+", SYMB}
 
 };
 
