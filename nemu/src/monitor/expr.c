@@ -127,6 +127,7 @@ static bool make_token(char *e)
 
 				switch (rules[i].token_type)
 				{
+				case SYMB:
 				case REG:
 				case HEX:
 				case NUM:
@@ -138,7 +139,7 @@ static bool make_token(char *e)
 				}
 				case NOTYPE:
 				    break;//空格直接丢弃
-				case SYMB:
+/*				case SYMB:
 				{
 //				    bool success = true;
 				    strncpy(tokens[nr_token].str, substr_start, substr_len);
@@ -149,7 +150,7 @@ static bool make_token(char *e)
 				    nr_token++;
 //				    printf("good SYMB! %s\n", tokens[nr_token].str);
 				    break;
-				}
+				}*/
 				default:
 					tokens[nr_token].type = rules[i].token_type;
 					nr_token++;
