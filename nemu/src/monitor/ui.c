@@ -156,6 +156,7 @@ cmd_handler(cmd_x)
 	    sprintf(NewArgs, "%d", argsNum);
 	    memmove(NewArgs + 1, NewArgs, strlen(NewArgs));
         NewArgs[0] = '*';
+        NewArgs[strlen(NewArgs)] = '\0';
     	uint32_t val = expr(NewArgs, &success);
     	if (!success)
     	{
