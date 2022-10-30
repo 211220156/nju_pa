@@ -149,16 +149,19 @@ cmd_handler(cmd_x)
 	int len = 0;
 	while (args[len] != ' ') { len++; }
 	char N[32];
-	strncpy(N, args, len);
+	strncpy(N, args, len);//提取执行次数N
 	int times = atoi(N), argsNum = atoi(args + len + 1);
 	char NewArgs[32];
 	for (int i = 1; i <= times; i++){
 	    sprintf(NewArgs, "%d", argsNum);
+	    
 	    int digit = 0, temp = argsNum;
 	    while (temp > 0) { temp /= 10; digit++;  }//统计位数
+	    
 	    memmove(NewArgs + 1, NewArgs, digit);
         NewArgs[0] = '*';//拼接上解引用符
         NewArgs[digit + 1] = '\0';
+        
 //        printf("%s\n", NewArgs);
     	uint32_t val = expr(NewArgs, &success);
     	if (!success)
@@ -169,7 +172,7 @@ cmd_handler(cmd_x)
     	{
     		printf("%d\n", val);
     	}
-    	argsNum += 4;
+    	argsNum += 4;//每次4字节
 	}
 	return 0;
 

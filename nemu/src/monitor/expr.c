@@ -144,7 +144,6 @@ static bool make_token(char *e)
                     else {
                         strncpy(tokens[nr_token].str, substr_start, 32);
                     }
-                    printf("tokens[nr_token].str : %s\n",tokens[nr_token].str);
 					nr_token++;
 					break;
 				}
@@ -182,7 +181,6 @@ static bool make_token(char *e)
 
 bool check_parentheses(int p, int q, bool* success)
 {
-//    printf("in check!\n");
     int stk[32], top = -1, lastOutP = 0;
     for (int i = p; i <= q; i++){
         if (tokens[i].type == LEFTP)
@@ -209,7 +207,6 @@ uint32_t eval(int p, int q, bool* success)
 {
     if(p > q) {
         if (tokens[p].type == NEG || tokens[p].type == DEREF){
-//            printf("p>q\n");
             return 0;
         }
         *success = false;
@@ -265,7 +262,7 @@ uint32_t eval(int p, int q, bool* success)
         }
         case SYMB:
         {
-            printf("in SYMB : %s\n", tokens[p].str);
+//            printf("in SYMB : %s\n", tokens[p].str);
             return look_up_symtab(tokens[p].str, success);
         }
         default:
