@@ -137,7 +137,39 @@ ph_error:
 	puts("Command format: \"ph EXPR\"");
 	return 0;
 }
+cmd_handler(cmd_x)
+{
+	if (args == NULL)
+	{
+		goto x_error;
+	}
+	//if(args + strspn(args, " ") >= cmd_end) { goto p_error; }
 
+	bool success;
+	int len = 0;
+	while (args[len] != ' ') { len++; }
+	char *N;
+	strncpy(N, args, len);
+	args[len] = '*';
+	args += len;
+	int times = atoi(N);
+	for (int i = 1; i <= times; i++){
+    	uint32_t val = expr(args, &success);
+    	if (!success)
+    	{
+    		printf("invalid expression: '%s'\n", args);
+    	}
+    	else
+    	{
+    		printf("%d\n", val);
+    	}
+	}
+	return 0;
+
+x_error:
+	puts("Command format: \"x N EXPR\"");
+	return 0;
+}
 uint32_t look_up_fun_symtab(char *, bool *);
 
 //static void cmd_b(char *e, char *cmd_end) {
@@ -262,6 +294,7 @@ static struct
 	/* TODO: Add more commands */
 	{"si", "Single Step Execution", cmd_si},
 	{"info", "Print register and watch point info", cmd_info},
+	{"x", "print the memory", cmd_x}
 
 };
 
