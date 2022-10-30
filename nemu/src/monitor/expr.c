@@ -133,7 +133,10 @@ static bool make_token(char *e)
 				case NUM:
 				{
 				    tokens[nr_token].type = rules[i].token_type;
-                    strncpy(tokens[nr_token].str, substr_start, substr_len);
+				    if (substr_len <= 32)
+                        strncpy(tokens[nr_token].str, substr_start, substr_len);
+                    else
+                        strncpy(tokens[nr_token].str, substr_start, 32);
 					nr_token++;
 					break;
 				}
