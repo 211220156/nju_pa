@@ -249,6 +249,10 @@ uint32_t eval(int p, int q, bool* success)
             if (strcmp(tokens[p].str, "$dh") == 0) return cpu.gpr[2]._8[1];
             if (strcmp(tokens[p].str, "$bh") == 0) return cpu.gpr[3]._8[1];
         }
+        case SYMB:
+        {
+            return look_up_symtab(tokens[p].str, success);
+        }
         default:
             return 0;
         }
