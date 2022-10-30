@@ -14,7 +14,7 @@
 enum
 {
 	NOTYPE = 256,
-	EQ,
+	
 	NUM,
 	REG,
 	SYMB,
@@ -22,7 +22,7 @@ enum
 	/* TODO: Add more token types */
 	LEFTP,
 	RIGHTP,//263
-	
+	EQ,
     ADD,
     SUB,
     DIV,
