@@ -108,7 +108,9 @@ static bool make_token(char *e)
 
 	nr_token = 0;
     for (int i = 0; i < 32; i++){
+        printf("prev: %s \n ", tokens[i].str);
         strcpy(tokens[i].str, "");
+        printf("curr: %s \n ", tokens[i].str);
     }
 	while (e[position] != '\0')
 	{
