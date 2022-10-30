@@ -293,6 +293,7 @@ uint32_t eval(int p, int q, bool* success)
                     op = i;
             }
         }
+        printf("op = %d\n", op);
         uint32_t val1 = eval(p, op - 1, success);
         printf("val1 : %d  p : %d  q : %d\n ", val1, p, op - 1);
         uint32_t val2 = eval(op + 1, q, success);
