@@ -11,7 +11,7 @@
  */
 #include <sys/types.h>
 #include <regex.h>
-extern void load_elf_tables(char* exec_file);
+
 enum
 {
 	NOTYPE = 256,
@@ -59,7 +59,8 @@ static struct rule
 	{"\\(", LEFTP},
 	{"\\)", RIGHTP},
 	{"\\+", ADD},
-	{"==", EQ}
+	{"==", EQ},
+	{"[0-9a-zA-Z]+", SYMB}
 
 };
 
@@ -96,9 +97,7 @@ typedef struct token
 Token tokens[32];
 int nr_token;
 
-char *strtab = NULL;
-Elf32_Sym *symtab = NULL;
-int nr_symtab_entry;
+uint32_t look_up_symtab(char *sym, bool *success);
 
 static bool make_token(char *e)
 {
@@ -106,7 +105,6 @@ static bool make_token(char *e)
 	int i;
 	regmatch_t pmatch;
     
-    load_elf_tables(exec_file);
 
 	nr_token = 0;
 
@@ -140,6 +138,16 @@ static bool make_token(char *e)
 				}
 				case NOTYPE:
 				    break;//空格直接丢弃
+				case SYMB:
+				{
+				    strncpy(tokens[nr_token].str, substr_start, substr_len);
+				    uint32_t val = look_up_symtab(tokens[nr_token].str, success);
+				    if (*success == false)
+				        return false;
+				    tokens[nr_token].type = rules[i].token_type;
+				    nr_token++;
+				    break;
+				}
 				default:
 					tokens[nr_token].type = rules[i].token_type;
 					nr_token++;
