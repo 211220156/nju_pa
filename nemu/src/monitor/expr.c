@@ -292,9 +292,7 @@ uint32_t eval(int p, int q, bool* success)
                     op = i;
             }
         }
-//        printf("val1 p:%d q:%d \n", p, op - 1);
         uint32_t val1 = eval(p, op - 1, success);
-//        printf("val2 p:%d q:%d \n", op + 1, q);
         uint32_t val2 = eval(op + 1, q, success);
         switch(tokens[op].type) {
             case ADD: return val1 + val2;
