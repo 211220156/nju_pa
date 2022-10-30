@@ -174,7 +174,7 @@ static bool make_token(char *e)
 
 bool check_parentheses(int p, int q, bool* success)
 {
-//    printf("in check!\n");
+    printf("in check!\n");
     int stk[32], top = -1, lastOutP = 0;
     for (int i = p; i <= q; i++){
         if (tokens[i].type == LEFTP)
