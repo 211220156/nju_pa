@@ -174,7 +174,7 @@ static bool make_token(char *e)
 
 bool check_parentheses(int p, int q, bool* success)
 {
-    printf("in check!\n");
+//    printf("in check!\n");
     int stk[32], top = -1, lastOutP = 0;
     for (int i = p; i <= q; i++){
         if (tokens[i].type == LEFTP)
@@ -271,11 +271,11 @@ uint32_t eval(int p, int q, bool* success)
     }
     else {
         //check返回false有两种可能：一种是表达式不合法，这时候success也会变成false，另一种是表达式合法，正常计算
-        printf("in eval!\n");
+//        printf("in eval!\n");
         if (*success == false){
             return 0;
         }
-        printf("in eval22222!\n");
+//        printf("in eval22222!\n");
         //下面是正常计算
         int op = 0;
         bool inParentheses = false;
@@ -301,7 +301,7 @@ uint32_t eval(int p, int q, bool* success)
             case NEG:
             case SUB: return val1 - val2;
             case DEREF: {
-                printf("in DEREF!\n");
+//                printf("in DEREF!\n");
                 return vaddr_read(val2, SREG_CS, 4);
             }
             case MUL: return val1 * val2;
