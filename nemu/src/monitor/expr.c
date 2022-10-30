@@ -108,9 +108,9 @@ static bool make_token(char *e)
 
 	nr_token = 0;
     for (int i = 0; i < 32; i++){
-        printf("prev: %s \n ", tokens[i].str);
+//        printf("prev: %s \n ", tokens[i].str);
         strcpy(tokens[i].str, "");
-        printf("curr: %s \n ", tokens[i].str);
+//        printf("curr: %s \n ", tokens[i].str);
     }
 	while (e[position] != '\0')
 	{
@@ -136,12 +136,14 @@ static bool make_token(char *e)
 				case HEX:
 				case NUM:
 				{
+				    strcpy(tokens[nr_token].str, "");
+				    printf("prev tokens[nr_token].str: %s\n", tokens[nr_token].str);
 				    tokens[nr_token].type = rules[i].token_type;
 				    if (substr_len <= 32)
                         strncpy(tokens[nr_token].str, substr_start, substr_len);
                     else
                         strncpy(tokens[nr_token].str, substr_start, 32);
-                    printf("tokens[nr_token].str: %s\n", tokens[nr_token].str);
+                    printf("after      tokens[nr_token].str: %s\n", tokens[nr_token].str);
 					nr_token++;
 					break;
 				}
