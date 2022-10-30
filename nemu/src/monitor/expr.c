@@ -283,7 +283,6 @@ uint32_t eval(int p, int q, bool* success)
         for (int i = p; i <= q; i++){
             if (op == 0 && tokens[i].type > 262){
                 op = i;
-                printf("op=%d\n", op);
             } else {
                 if (tokens[i].type == LEFTP)
                     inParentheses = true;
