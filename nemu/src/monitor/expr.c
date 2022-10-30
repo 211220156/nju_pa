@@ -129,7 +129,6 @@ static bool make_token(char *e)
 				 * Add codes to perform some actions with this token.
 				 */
 
-                strcpy(tokens[nr_token].str, "");
 				switch (rules[i].token_type)
 				{
 				case SYMB:
@@ -142,6 +141,7 @@ static bool make_token(char *e)
                         strncpy(tokens[nr_token].str, substr_start, substr_len);
                     else
                         strncpy(tokens[nr_token].str, substr_start, 32);
+                    printf("tokens[nr_token].str: %s\n", tokens[nr_token].str);
 					nr_token++;
 					break;
 				}
