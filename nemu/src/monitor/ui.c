@@ -150,11 +150,12 @@ cmd_handler(cmd_x)
 	while (args[len] != ' ') { len++; }
 	char N[32];
 	strncpy(N, args, len);
-	args[len] = '*';
-	args += len;
-	int times = atoi(N);
+	int times = atoi(N), argsNum = atoi(args + len + 1);
+	char *NewArgs[32];
 	for (int i = 1; i <= times; i++){
-    	uint32_t val = expr(args, &success);
+	    sprintf(NewArgs, "%d", argsNum);
+	    NewArgs = strcat("*", NewArgs);
+    	uint32_t val = expr(NewArgs, &success);
     	if (!success)
     	{
     		printf("invalid expression: '%s'\n", args);
@@ -163,6 +164,7 @@ cmd_handler(cmd_x)
     	{
     		printf("%d\n", val);
     	}
+    	argsNum += 4;
 	}
 	return 0;
 
