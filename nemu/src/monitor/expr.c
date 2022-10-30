@@ -200,7 +200,7 @@ bool check_parentheses(int p, int q, bool* success)
 uint32_t eval(int p, int q, bool* success)
 {
     if(p > q) {
-        if (tokens[q].type == NEG || tokens[q].type == DEREF){
+        if (tokens[p].type == NEG || tokens[p].type == DEREF){
             printf("p>q\n");
             return 0;
         }
