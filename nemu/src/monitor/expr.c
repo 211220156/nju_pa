@@ -142,7 +142,7 @@ static bool make_token(char *e)
 				{
 				    bool success = true;
 				    strncpy(tokens[nr_token].str, substr_start, substr_len);
-				    uint32_t val = look_up_symtab(tokens[nr_token].str, &success);
+				    look_up_symtab(tokens[nr_token].str, &success);
 				    if (success == false)
 				        return false;
 				    tokens[nr_token].type = rules[i].token_type;
