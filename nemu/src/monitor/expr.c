@@ -147,7 +147,7 @@ static bool make_token(char *e)
 				        return false;
 				    tokens[nr_token].type = rules[i].token_type;
 				    nr_token++;
-				    printf("good SYMB! %s\n", tokens[nr_token].str);
+//				    printf("good SYMB! %s\n", tokens[nr_token].str);
 				    break;
 				}
 				default:
