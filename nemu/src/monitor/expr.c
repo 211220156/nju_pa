@@ -323,6 +323,7 @@ uint32_t expr(char *e, bool *success)
             tokens[i].type = DEREF;
         }
         if (tokens[i].type == SUB && (i == 0 || tokens[i - 1].type > 260)){
+            printf("i = %d NEG\n", i);
             tokens[i].type = NEG;
         }
     }
