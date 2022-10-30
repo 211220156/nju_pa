@@ -278,15 +278,15 @@ uint32_t eval(int p, int q, bool* success)
         }
         //下面是正常计算
         int op = -1;
-        bool inParentheses = false;
+        int inParentheses = 0;
         for (int i = p; i <= q; i++){
             if (op == -1 && tokens[i].type > 262){
                 op = i;
             } else {
                 if (tokens[i].type == LEFTP)
-                    inParentheses = true;
+                    inParentheses++;
                 else if (tokens[i].type == RIGHTP)
-                    inParentheses = false;
+                    inParentheses--;
                 else if (tokens[i].type > 262 && tokens[i].type < tokens[op].type && !inParentheses)
                     //优先级底且不在括号里
                     op = i;
