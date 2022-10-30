@@ -57,7 +57,8 @@ static struct rule
 	{"/", DIV},
 	{"\\(", LEFTP},
 	{"\\)", RIGHTP},
-	{"\\+", ADD}
+	{"\\+", ADD},
+	{"==", EQ}
 
 };
 
@@ -177,7 +178,7 @@ bool check_parentheses(int p, int q, bool* success)
 uint32_t eval(int p, int q, bool* success)
 {
     if(p > q) {
-        if (tokens[p].type == NEG){
+        if (tokens[p].type == NEG || tokens[p].type == DEREF){
             return 0;
         }
         *success = false;
@@ -268,8 +269,10 @@ uint32_t eval(int p, int q, bool* success)
             case ADD: return val1 + val2;
             case NEG:
             case SUB: return val1 - val2;
+            case DEREF: return *val2;
             case MUL: return val1 * val2;
             case DIV: return val1 / val2;
+            case EQ: return val1 == val2;
             default: return 0;
         
         }
