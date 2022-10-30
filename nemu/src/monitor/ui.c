@@ -151,10 +151,11 @@ cmd_handler(cmd_x)
 	char N[32];
 	strncpy(N, args, len);
 	int times = atoi(N), argsNum = atoi(args + len + 1);
-	char *NewArgs = NULL;
+	char NewArgs[32];
 	for (int i = 1; i <= times; i++){
 	    sprintf(NewArgs, "%d", argsNum);
-	    NewArgs = strcat("*", NewArgs);
+	    memmove(NewArgs + 1, NewArgs, strlen(NewArgs));
+        NewArgs[0] = '*';
     	uint32_t val = expr(NewArgs, &success);
     	if (!success)
     	{
