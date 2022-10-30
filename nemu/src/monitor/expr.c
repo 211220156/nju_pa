@@ -276,6 +276,7 @@ uint32_t eval(int p, int q, bool* success)
             return 0;
         }
         //下面是正常计算
+        printf("in eval!\n");
         int op = 0;
         bool inParentheses = false;
         for (int i = p; i <= q; i++){
