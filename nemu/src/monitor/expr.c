@@ -140,11 +140,11 @@ static bool make_token(char *e)
 				    break;//空格直接丢弃
 				case SYMB:
 				{
-				    bool success = true;
+//				    bool success = true;
 				    strncpy(tokens[nr_token].str, substr_start, substr_len);
-				    look_up_symtab(tokens[nr_token].str, &success);
-				    if (success == false)
-				        return false;
+//				    look_up_symtab(tokens[nr_token].str, &success);
+//				    if (success == false)
+//				        return false;
 				    tokens[nr_token].type = rules[i].token_type;
 				    nr_token++;
 //				    printf("good SYMB! %s\n", tokens[nr_token].str);
