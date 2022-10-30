@@ -293,7 +293,7 @@ uint32_t eval(int p, int q, bool* success)
             case NEG:
             case SUB: return val1 - val2;
             case DEREF: {
-                return vaddr_read(val2, SREG_CS, 32);
+                return vaddr_read(val2, SREG_CS, 4);
             }
             case MUL: return val1 * val2;
             case DIV: return val1 / val2;
