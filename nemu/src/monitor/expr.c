@@ -278,10 +278,10 @@ uint32_t eval(int p, int q, bool* success)
         }
         //下面是正常计算
         printf("in eval!\n");
-        int op = 0;
+        int op = -1;
         bool inParentheses = false;
         for (int i = p; i <= q; i++){
-            if (op == 0 && tokens[i].type > 262){
+            if (op == -1 && tokens[i].type > 262){
                 op = i;
             } else {
                 if (tokens[i].type == LEFTP)
