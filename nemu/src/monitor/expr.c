@@ -10,7 +10,7 @@
  */
 #include <sys/types.h>
 #include <regex.h>
-
+extern void load_elf_tables(char* exec_file);
 enum
 {
 	NOTYPE = 256,
@@ -94,6 +94,11 @@ typedef struct token
 
 Token tokens[32];
 int nr_token;
+
+char *strtab = NULL;
+Elf32_Sym *symtab = NULL;
+int nr_symtab_entry;
+
 static bool make_token(char *e)
 {
 	int position = 0;
