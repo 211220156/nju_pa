@@ -202,7 +202,7 @@ uint32_t eval(int p, int q, bool* success)
 {
     if(p > q) {
         if (tokens[p].type == NEG || tokens[p].type == DEREF){
-            printf("NEG -> 0\n");
+            printf("NEG -> 0!!!!!!!!!!!!!!!!!!\n");
             return 0;
         }
         *success = false;
@@ -294,9 +294,9 @@ uint32_t eval(int p, int q, bool* success)
             }
         }
         uint32_t val1 = eval(p, op - 1, success);
-        printf("val1 : %d\n", val1);
+        printf("val1 : %d  p : %d  q : %d\n ", val1, p, op - 1);
         uint32_t val2 = eval(op + 1, q, success);
-        printf("val2 : %d\n", val2);
+        printf("val2 : %d  p : %d  q : %d\n", val2, op + 1, q);
         switch(tokens[op].type) {
             case ADD: return val1 + val2;
             case NEG:
