@@ -257,6 +257,7 @@ uint32_t eval(int p, int q, bool* success)
         }
         case SYMB:
         {
+            printf("in SYMB : %s\n", tokens[p].str);
             return look_up_symtab(tokens[p].str, success);
         }
         default:
@@ -298,10 +299,7 @@ uint32_t eval(int p, int q, bool* success)
             case ADD: return val1 + val2;
             case NEG:
             case SUB: return val1 - val2;
-            case DEREF: {
-                printf("in DEREF!\n");
-                return vaddr_read(val2, SREG_CS, 4);
-            }
+            case DEREF: return vaddr_read(val2, SREG_CS, 4);
             case MUL: return val1 * val2;
             case DIV: return val1 / val2;
             case EQ: return val1 == val2;
