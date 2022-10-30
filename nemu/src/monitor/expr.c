@@ -201,6 +201,7 @@ uint32_t eval(int p, int q, bool* success)
 {
     if(p > q) {
         if (tokens[p].type == NEG || tokens[p].type == DEREF){
+            printf("p>q\n");
             return 0;
         }
         *success = false;
@@ -321,7 +322,6 @@ uint32_t expr(char *e, bool *success)
 	assert(0);*/
 	for(int i = 0; i < nr_token; i ++) {
         if(tokens[i].type == MUL && (i == 0 || tokens[i - 1].type > 260)) {//若*前一位是运算符（>260） 
-            printf("MUL ->  DEREF!\n");
             tokens[i].type = DEREF;
         }
         if (tokens[i].type == SUB && (i == 0 || tokens[i - 1].type > 260)){
