@@ -42,7 +42,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	uint32_t sign = paddr >> 13;
 	uint32_t group_num = (paddr >> 6) & 0x7f; //取组号
 	uint32_t offset = paddr & 0x3f;
-	uint32_t ans;
+	uint32_t ans = 0;
 	for (int i = 0; i < 8; i++){
 	    if (cache[group_num * 8 + i].sign == sign && cache[group_num * 8 + i].valid_bit){
 	        //开始读
