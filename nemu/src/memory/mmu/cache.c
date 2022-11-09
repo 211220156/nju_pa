@@ -25,7 +25,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	    if (cache[group_num * 8 + i].sign == sign && cache[group_num * 8 + i].valid_bit == 1){
 	        //开始写
 	        if (offset + len <= 64)//没跨行
-	            memcpy(cache[group_num * 8 + i].block, &data, len);
+	            memcpy(cache[group_num * 8 + i].block + offset, &data, len);
 	        else {
 	            cache_write(paddr, 64 - offset, data);
 	            cache_write(paddr + 64 - offset, offset + len - 64, data >> (8 * (64 - offset)));
