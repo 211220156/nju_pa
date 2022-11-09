@@ -18,7 +18,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	// implement me in PA 3-1
 	//因为是write through，需要向主存里面写入。
 	memcpy(hw_mem + paddr, &data, len);
-	uint32_t sign = paddr >> 13;
+	uint32_t sign = (paddr >> 13) & 0x7ffff;
 	uint32_t group_num = (paddr >> 6) & 0x7f; //取组号
 	uint32_t offset = paddr & 0x3f;
 	for (int i = 0; i < 8; i++){
@@ -39,7 +39,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 uint32_t cache_read(paddr_t paddr, size_t len)
 {
 	// implement me in PA 3-1
-	uint32_t sign = paddr >> 13;
+	uint32_t sign = (paddr >> 13) & 0x7ffff;
 	uint32_t group_num = (paddr >> 6) & 0x7f; //取组号
 	uint32_t offset = paddr & 0x3f;
 	uint32_t ans = 0;
