@@ -5,7 +5,7 @@
 #include <memory.h>
 #include <stdio.h>
 
-//#include "memory/mmu/cache.h"
+#include "memory/mmu/cache.h"
 
 uint8_t hw_mem[MEM_SIZE_B];
 
