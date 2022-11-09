@@ -2,7 +2,7 @@
 #include "memory/memory.h"
 #include <stdlib.h>
 #include <time.h>
-
+/*
 CacheLine cache[1024];
 // init the cache
 void init_cache()
@@ -75,4 +75,4 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	memcpy(cache[group_num * 8 + num].block, hw_mem + paddr - offset, 64);
 	return ans;
 }
-
+*/
