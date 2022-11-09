@@ -5,6 +5,14 @@
 
 #ifdef CACHE_ENABLED
 
+typedef struct {
+    
+    uint32_t valid_bit : 1;
+    uint32_t sign : 19;
+    uint8_t block[64];
+    
+} CacheLine;
+
 // init the cache
 void init_cache();
 

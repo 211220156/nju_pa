@@ -2,7 +2,7 @@
 #define __MEMORY_H__
 
 #include "nemu.h"
-#include "memory/mmu/cache.h"
+//#include "memory/mmu/cache.h"
 #include "memory/mmu/tlb.h"
 #include "memory/mmu/segment.h"
 #include "memory/mmu/page.h"
