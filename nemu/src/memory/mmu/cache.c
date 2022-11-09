@@ -68,10 +68,13 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	    }
 	}
 	//若没找到valid_bit为0的cache行，则在组内随机选一行替换掉。
-	srand(time(0));
+/*	srand(time(0));
 	int num = rand() % 8;
 	cache[group_num * 8 + num].valid_bit = 1;
 	cache[group_num * 8 + num].sign = sign;
-	memcpy(cache[group_num * 8 + num].block, hw_mem + paddr - offset, 64);
+	memcpy(cache[group_num * 8 + num].block, hw_mem + paddr - offset, 64);*/
+	cache[group_num * 8 + 1].valid_bit = 1;
+	cache[group_num * 8 + 1].sign = sign;
+	memcpy(cache[group_num * 8 + 1].block, hw_mem + paddr - offset, 64);
 	return ans;
 }
