@@ -22,7 +22,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	uint32_t group_num = (paddr >> 6) & 0x7f; //取组号
 	uint32_t offset = paddr & 0x3f;
 	for (int i = 0; i < 8; i++){
-	    if (cache[group_num * 8 + i].sign == sign && cache[group_num * 8 + i].valid_bit){
+	    if (cache[group_num * 8 + i].sign == sign && cache[group_num * 8 + i].valid_bit == 1){
 	        //开始写
 	        if (offset + len <= 64)//没跨行
 	            memcpy(cache[group_num * 8 + i].block, &data, len);
@@ -44,7 +44,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	uint32_t offset = paddr & 0x3f;
 	uint32_t ans = 0;
 	for (int i = 0; i < 8; i++){
-	    if (cache[group_num * 8 + i].sign == sign && cache[group_num * 8 + i].valid_bit){
+	    if (cache[group_num * 8 + i].sign == sign && cache[group_num * 8 + i].valid_bit == 1){
 	        //开始读
 	        if (offset + len <= 64)
 	            memcpy(&ans, cache[group_num * 8 + i].block + offset, len);
@@ -60,7 +60,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	//若没有找到，即缓存没有命中
 	memcpy(&ans, hw_mem + paddr, len);
 	for (int i = 0; i < 8; i++){
-	    if (!cache[group_num * 8 + i].valid_bit){//随机选一个空缺的cache行
+	    if (cache[group_num * 8 + i].valid_bit == 0){//随机选一个空缺的cache行
 	        cache[group_num * 8 + i].valid_bit = 1;
 	        cache[group_num * 8 + i].sign = sign;
 	        memcpy(cache[group_num * 8 + i].block, hw_mem + paddr - offset, 64);
