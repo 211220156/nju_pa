@@ -52,5 +52,22 @@ make_instr_func(jmp_near_indirect)
 }
 //ljmp
 make_instr_func(jmp_far_imm){
+    OPERAND opr;
+    opr.data_size = 32;
+    opr.addr = eip + 1;
+    opr.sreg = SREG_CS;
+    opr.type = OPR_IMM;
+    operand_read(&opr);
+    
+    if (data_size == 16){
+        cpu.eip = opr.val & 0xffff;
+    } else {
+        cpu.eip = opr.val;
+    }
+    //装载段寄存器可见部分
+    cpu.cs.val = instr_fetch(eip + 5, 2);
+    
+    load_sreg(1);//装载code segment寄存器隐藏部分
+    
     return 0;
 }
