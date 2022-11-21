@@ -83,7 +83,7 @@ make_instr_func(mov_c2r_l)
     OPERAND r, c;
     r.data_size = c.data_size = 32;
     len += modrm_r_rm(eip + 1, &r, &c);
-    c.type = OPR_CREG;
+    c.type = OPR_CREG;//注意c的type
     operand_read(&c);
     r.val = c.val;
     operand_write(&r);
@@ -97,7 +97,7 @@ make_instr_func(mov_r2c_l)
     len += modrm_r_rm(eip + 1, &c, &r);
     operand_read(&r);
     c.val = r.val;
-    c.type = OPR_CREG;
+    c.type = OPR_CREG;//注意c的type
     operand_write(&c);
     return len;
 }
@@ -107,7 +107,7 @@ make_instr_func(mov_rm2s_w)
     OPERAND rm, s;
     rm.data_size = s.data_size = 16;
     len += modrm_r_rm(eip + 1, &s, &rm);
-    s.type = OPR_SREG;
+    s.type = OPR_SREG;//注意s的type
     operand_read(&rm);
     s.val = rm.val;
     operand_write(&s);
