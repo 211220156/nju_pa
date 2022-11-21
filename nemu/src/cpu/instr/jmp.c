@@ -50,3 +50,7 @@ make_instr_func(jmp_near_indirect)
     
     return 0;
 }
+//ljmp
+make_instr_func(jmp_far_imm){
+    
+}

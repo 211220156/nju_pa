@@ -2,7 +2,7 @@
 /*
 Put the implementations of `lgdt' instructions here.
 */
-/*
+
 make_instr_func(lgdt){
     int len = 1;
     OPERAND opr;
@@ -17,4 +17,4 @@ make_instr_func(lgdt){
     OPERAND_READ(&opr);
     cpu.gdtr.base = opr.val;
     return len;
-}*/
+}
