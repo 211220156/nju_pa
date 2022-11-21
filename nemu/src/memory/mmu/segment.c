@@ -24,7 +24,7 @@ void load_sreg(uint8_t sreg)
 	uint32_t base = (curr->base_31_24 << 24) + (curr->base_23_16 << 16) + curr->base_15_0;
 	uint32_t limit = (curr->limit_19_16 << 16) + curr->limit_15_0;
 	assert(limit == 0xfffff && base == 0);
-	cpu.cache[sreg].base = base;
-	cpu.cache[sreg].limit = limit;
-	cpu.cache[sreg].privilege_level = curr->privilege_level;
+	cpu.segReg[sreg].base = base;
+	cpu.segReg[sreg].limit = limit;
+	cpu.segReg[sreg].privilege_level = curr->privilege_level;
 }
