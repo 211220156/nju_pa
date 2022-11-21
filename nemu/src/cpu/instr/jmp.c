@@ -65,7 +65,7 @@ make_instr_func(jmp_far_imm){
         cpu.eip = opr.val;
     }
     //装载段寄存器可见部分
-    cpu.cs.val = instr_fetch(eip + 5, 2);
+    cpu.cs.val = instr_fetch(eip + 5, 1);
     
     load_sreg(1);//装载code segment寄存器隐藏部分
     
