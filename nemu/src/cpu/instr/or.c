@@ -13,3 +13,4 @@ static void instr_execute_2op()
 }
 make_instr_impl_2op(or, r, rm, v)
 make_instr_impl_2op(or, rm, r, b)
+make_instr_impl_2op(or, i, rm, bv)
