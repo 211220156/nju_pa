@@ -9,12 +9,12 @@ make_instr_func(lgdt){
     //先读取16位的limit
     opr.data_size = 16;
     len += modrm_rm(eip + 1, &opr);
-    OPERAND_READ(&opr);
+    operand_read(&opr);
     cpu.gdtr.limit = opr.val;
     //继续读取32位的base，16位limit占两字节，因此opr的地址需要+2
     opr.addr += 2;
     opr.data_size = 32;
-    OPERAND_READ(&opr);
+    operand_read(&opr);
     cpu.gdtr.base = opr.val;
     return len;
 }
