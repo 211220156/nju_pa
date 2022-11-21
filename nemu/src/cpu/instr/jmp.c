@@ -52,5 +52,5 @@ make_instr_func(jmp_near_indirect)
 }
 //ljmp
 make_instr_func(jmp_far_imm){
-    
+    return 0;
 }
