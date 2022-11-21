@@ -20,6 +20,6 @@ void load_sreg(uint8_t sreg)
 	 */
 	uint32_t addr = (uint32_t)hw_mem + cpu.gdtr.base + sreg * sizeof(SegDesc);
 	SegDesc* curr = (void*)addr;
-	assert(curr.present == 1 && curr.granularity == 1);
+	assert(curr->present == 1 && curr->granularity == 1);
 	
 }
