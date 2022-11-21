@@ -18,8 +18,8 @@ void load_sreg(uint8_t sreg)
 	/* TODO: load the invisibile part of the segment register 'sreg' by reading the GDT.
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
-//	uint32_t addr = cpu.gdtr.base + sreg * sizeof(SegDesc);
-	
-//	assert(curr.present == 1 && curr.granularity == 1);
+	uint32_t addr = (uint32_t)hw_mem + cpu.gdtr.base + sreg * sizeof(SegDesc);
+	SegDesc* curr = (void*)addr;
+	assert(curr.present == 1 && curr.granularity == 1);
 	
 }
