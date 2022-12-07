@@ -9,8 +9,8 @@ paddr_t page_translate(laddr_t laddr)
 	fflush(stdout);
 	assert(0);*/
 	
-	uint32_t dir = laddr >> 22;
-	uint32_t page = (laddr & 0x3fffff) >> 12;
+	uint32_t dir = (laddr >> 22) & 0x3ff;
+	uint32_t page = (laddr >> 12) & 0x3ff;
 	uint32_t offset = laddr & 0xfff;
 	
 	PDE *pageDir = (PDE*)(hw_mem + (cpu.cr3.pdbr << 12) + (dir << 2));
