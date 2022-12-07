@@ -44,12 +44,21 @@ void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 
 uint32_t laddr_read(laddr_t laddr, size_t len)
 {
-	return paddr_read(laddr, len);
+    assert(len == 1 || len == 2 || len == 4);
+    uint32_t paddr = laddr;
+    if (cpu.cr0.pg && cpu.cr0.pe){//开启分页机制
+        paddr = page_translate(laddr);//还没处理跨页
+    }
+	return paddr_read(paddr, len);
 }
 
 void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
-	paddr_write(laddr, len, data);
+    uint32_t paddr = laddr;
+	if(cpu.cr0.pe && cpu.cr0.pg) {
+		paddr = page_translate(laddr);
+	}
+	paddr_write(paddr, len, data);
 }
 
 uint32_t vaddr_read(vaddr_t vaddr, uint8_t sreg, size_t len)
