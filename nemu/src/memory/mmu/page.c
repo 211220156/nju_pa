@@ -14,9 +14,9 @@ paddr_t page_translate(laddr_t laddr)
 	uint32_t offset = laddr & 0xfff;
 	
 	PDE *pageDir = (PDE*)(hw_mem + (cpu.cr3.pdbr << 12) + (dir << 2));
-	
-	PTE *pageTable = (PTE*)(hw_mem + (pageDir->page_frame << 12) + (page << 2));
 	assert(pageDir->present == 1);
+	PTE *pageTable = (PTE*)(hw_mem + (pageDir->page_frame << 12) + (page << 2));
+	
 	assert(pageTable->present == 1);
 	
 	return (pageTable->page_frame << 12) + offset;
