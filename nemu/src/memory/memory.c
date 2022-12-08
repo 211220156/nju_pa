@@ -47,7 +47,13 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
     assert(len == 1 || len == 2 || len == 4);
     uint32_t paddr = laddr;
     if (cpu.cr0.pg && cpu.cr0.pe){//开启分页机制
-        paddr = page_translate(laddr);//还没处理跨页
+        paddr = page_translate(laddr);
+        uint32_t dst = (paddr & 0xfff) + (len << 3);
+        if (dst > 0xfff){//跨页
+            uint32_t res1 = paddr_read(paddr, (0x1000 - (len << 3)) >> 3);
+            uint32_t res2 = paddr_read(((paddr >> 12) + 1) << 12, (dst - 0x1000) >> 3);
+            return (res2 << (dst - 0x1000)) + res1;
+        }
     }
 	return paddr_read(paddr, len);
 }
@@ -57,6 +63,12 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
     uint32_t paddr = laddr;
 	if(cpu.cr0.pe && cpu.cr0.pg) {
 		paddr = page_translate(laddr);
+		uint32_t dst = (paddr & 0xfff) + (len << 3);
+        if (dst > 0xfff){//跨页
+            paddr_write(paddr, (0x1000 - (len << 3)) >> 3);
+            paddr_write(((paddr >> 12) + 1) << 12, (dst - 0x1000) >> 3);
+            return;
+        }
 	}
 	paddr_write(paddr, len, data);
 }
