@@ -47,7 +47,7 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
     assert(len == 1 || len == 2 || len == 4);
     uint32_t paddr = laddr;
     if (cpu.cr0.pg && cpu.cr0.pe){//开启分页机制
-        if((laddr >> 12) != ((laddr + (len << 3)) >> 12)){
+        if((laddr >> 12) != ((laddr + len - 1) >> 12)){
 	        uint32_t len1 = (((laddr >> 12) + 1) << 12) - laddr;
 	        uint32_t low = paddr_read(page_translate(laddr), len1);
 	        uint32_t high = paddr_read(page_translate((((laddr >> 12) + 1) << 12)), len - len1);
@@ -63,7 +63,7 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
     uint32_t paddr = laddr;
 	if(cpu.cr0.pe && cpu.cr0.pg) {
-	    if((laddr >> 12) != ((laddr + (len << 3)) >> 12)){
+	    if((laddr >> 12) != ((laddr + len - 1) >> 12)){
 	        uint32_t len1 = (((laddr >> 12) + 1) << 12) - laddr;
 	        uint32_t low = data & (0xffffffff >> (32 - (len1 << 3)));
 	        uint32_t high = data >> (32 - (len1 << 3));
