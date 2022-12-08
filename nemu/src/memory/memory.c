@@ -47,13 +47,14 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
     assert(len == 1 || len == 2 || len == 4);
     uint32_t paddr = laddr;
     if (cpu.cr0.pg && cpu.cr0.pe){//开启分页机制
-        paddr = page_translate(laddr);
-        uint32_t dst = (paddr & 0xfff) + (len << 3);
-        if (dst > 0xfff){//跨页
-            uint32_t res1 = paddr_read(paddr, (0x1000 - (paddr & 0xfff)) >> 3);
-            uint32_t res2 = paddr_read(((paddr >> 12) + 1) << 12, (dst - 0x1000) >> 3);
-            return (res2 << (dst - 0x1000)) + res1;
-        }
+        if((laddr >> 12) != ((laddr + (len << 3)) >> 12)){
+	        uint32_t len1 = (((laddr >> 12) + 1) << 12) - laddr;
+	        uint32_t low = paddr_read(page_translate(laddr), len1);
+	        uint32_t high = paddr_read(page_translate((((laddr >> 12) + 1) << 12)), len - len1);
+	        return (high << (8 * len1)) + low;
+	    } 
+	    else
+            paddr = page_translate(laddr);
     }
 	return paddr_read(paddr, len);
 }
@@ -62,13 +63,16 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
     uint32_t paddr = laddr;
 	if(cpu.cr0.pe && cpu.cr0.pg) {
-		paddr = page_translate(laddr);
-		uint32_t dst = (paddr & 0xfff) + (len << 3);
-        if (dst > 0xfff){//跨页
-            paddr_write(paddr, (0x1000 - (paddr & 0xfff)) >> 3, data & (0xffffffff >> (32 - (0x1000 - (paddr & 0xfff)))));
-            paddr_write(((paddr >> 12) + 1) << 12, (dst - 0x1000) >> 3, data & (0xffffffff << (32 - (dst - 0x1000))));
-            return;
-        }
+	    if((laddr >> 12) != ((laddr + (len << 3)) >> 12)){
+	        uint32_t len1 = (((laddr >> 12) + 1) << 12) - laddr;
+	        uint32_t low = data & (0xffffffff >> (32 - (len1 << 3)));
+	        uint32_t high = data >> (32 - (len1 << 3));
+	        paddr_write(page_translate(laddr), len1, low);
+	        paddr_write(page_translate((((laddr >> 12) + 1) << 12)), len - len1, high);
+	        return;
+	    }
+	    else
+		    paddr = page_translate(laddr);
 	}
 	paddr_write(paddr, len, data);
 }
