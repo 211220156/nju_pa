@@ -65,8 +65,8 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 		paddr = page_translate(laddr);
 		uint32_t dst = (paddr & 0xfff) + (len << 3);
         if (dst > 0xfff){//跨页
-            paddr_write(paddr, (0x1000 - (len << 3)) >> 3);
-            paddr_write(((paddr >> 12) + 1) << 12, (dst - 0x1000) >> 3);
+            paddr_write(paddr, (0x1000 - (len << 3)) >> 3, data & (0xffffffff >> (32 - (0x1000 - (len << 3)))));
+            paddr_write(((paddr >> 12) + 1) << 12, (dst - 0x1000) >> 3, data & (0xffffffff << (32 - (dst - 0x1000))));
             return;
         }
 	}
