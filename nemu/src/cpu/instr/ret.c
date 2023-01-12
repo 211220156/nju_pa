@@ -7,6 +7,7 @@ make_instr_func(ret_near){
     OPERAND opr;
     opr.type = OPR_MEM;
     opr.data_size = data_size;
+    opr.sreg = SREG_DS;
     opr.addr = cpu.gpr[4].val;
     operand_read(&opr);
     cpu.gpr[4].val += (data_size / 8);
@@ -24,6 +25,7 @@ make_instr_func(ret_near_imm16)
     OPERAND opr;
     opr.type = OPR_MEM;
     opr.data_size = data_size;
+    opr.sreg = SREG_DS;
     opr.addr = cpu.gpr[4].val;
     operand_read(&opr);
     cpu.gpr[4].val += (data_size / 8);//这里修改了esp的值

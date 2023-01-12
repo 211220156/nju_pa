@@ -8,6 +8,7 @@ make_instr_func(leave)
     OPERAND top;
     top.data_size = data_size;
     top.type = OPR_MEM;
+    top.sreg = SREG_DS;
     top.addr = cpu.gpr[4].val;
     operand_read(&top);
     cpu.esp += (top.data_size / 8); 

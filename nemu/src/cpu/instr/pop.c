@@ -7,6 +7,7 @@ static void instr_execute_1op()
     operand_read(&opr_src);
     OPERAND top;
     top.data_size = data_size;
+    top.sreg = SREG_DS;
     top.type = OPR_MEM;
     top.addr = cpu.gpr[4].val;
     operand_read(&top);
