@@ -12,7 +12,7 @@ make_func_instr(int_)
     	opr.type = OPR_IMM;
 	opr.sreg = SREG_CS;
     	opr.data_size = 8;
-    	opr.addr = eip + 1;
+    	opr.addr = cpu.eip + 1;
     	operand_read(&opr);
 	print_asm_1("int", "", 2, &opr);
 	raise_sw_intr(opr.val);
