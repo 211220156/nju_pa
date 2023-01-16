@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-CacheLine cache[1024];
+//CacheLine cache[1024];
 // init the cache
 void init_cache()
 {
