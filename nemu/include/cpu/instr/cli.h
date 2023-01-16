@@ -3,5 +3,5 @@
 /*
 Put the declarations of `cli' instructions here.
 */
-
+make_instr_func(cli);
 #endif

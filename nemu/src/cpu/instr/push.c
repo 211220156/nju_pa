@@ -23,3 +23,55 @@ make_instr_impl_1op(push, r, v)
 make_instr_impl_1op(push, rm, v)
 make_instr_impl_1op(push, i, b)
 make_instr_impl_1op(push, i, v)
+
+make_instr_func(pusha) {
+	uint32_t temp = cpu.esp;
+	OPERAND opr;
+	opr.data_size=32;
+	opr.type=OPR_MEM;
+	opr.sreg=SREG_DS;
+	//push eax
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = cpu.eax;
+	operand_write(&opr);
+	//push ecx
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = cpu.ecx;
+	operand_write(&opr);
+	//push edx
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = cpu.edx;
+	operand_write(&opr);
+	//push ebx
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = cpu.ebx;
+	operand_write(&opr);
+	//push temp
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = temp;
+	operand_write(&opr);
+	//push ebp
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = cpu.ebp;
+	operand_write(&opr);
+	//push esi
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = cpu.esi;
+	operand_write(&opr);
+	//push edi
+	cpu.esp -= data_size / 8;
+	opr.addr = cpu.esp;
+	opr.val = cpu.edi;
+	operand_write(&opr);
+
+	print_asm_0("pusha", "", 1);
+	return 1;
+	
+}
