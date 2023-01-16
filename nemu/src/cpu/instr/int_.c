@@ -6,7 +6,7 @@ Put the implementations of `int' instructions here.
 
 Special note for `int': please use the instruction name `int_' instead of `int'.
 */
-make_func_instr(int_)
+make_instr_func(int_)
 {
 	OPERAND opr;
     	opr.type = OPR_IMM;
