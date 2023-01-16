@@ -17,12 +17,12 @@ void raise_intr(uint8_t intr_no)
 	//find IDT entry
 	uint32_t GateAddr = (uint32_t)hw_mem + page_translate(segment_translate(cpu.idtr.base + 8 * intr_no, SREG_DS));
 	GateDesc* gatedesc = (void*)GateAddr;
-//	if(gatedesc->type == 0xe)
-//		cpu.eflags.IF = 0; 
-	if(gatedesc->type==0xe)
-		cpu.eflags.IF=1;
-	else if(gatedesc->type==0xf)
-		cpu.eflags.IF=0;
+	if(gatedesc->type == 0xe)
+		cpu.eflags.IF = 0; 
+//	if(gatedesc->type==0xe)
+//		cpu.eflags.IF=1;
+//	else if(gatedesc->type==0xf)
+//		cpu.eflags.IF=0;
 	cpu.eip = (gatedesc->offset_31_16 << 16) + gatedesc->offset_15_0;
 #endif
 }
